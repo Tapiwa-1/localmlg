@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChiefRequest;
+use App\Http\Requests\UpdateChiefRequest;
 use App\Models\Chief;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 
 class ChiefController extends Controller
@@ -17,7 +19,12 @@ class ChiefController extends Controller
     public function index()
     {
         //
-        $chiefs = Chief::paginate(5)
+        $chiefs = Chief::query()
+            ->when(Request::input('search'), function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->paginate(5)
+            ->withQueryString()
             ->through(fn ($chief) => [
                 'id' => $chief->id,
                 'name' => $chief->name,
@@ -26,7 +33,8 @@ class ChiefController extends Controller
                 'gender' => $chief->gender,
                 'slug' => $chief->slug,
             ]);
-        return Inertia::render("Backend/Chief/Index", compact('chiefs'));
+        $filters = Request::only(['search']);
+        return Inertia::render("Backend/Chief/Index", compact('chiefs', 'filters'));
     }
 
     /**
@@ -51,8 +59,7 @@ class ChiefController extends Controller
     {
         //
         Chief::create($request->validated());
-        return to_route('chief.index');
-        // ->with('message', 'Chief Created Successfull');
+        return to_route('chief.index')->with('message', 'Chief Created Successfull');
     }
 
     /**
@@ -86,9 +93,12 @@ class ChiefController extends Controller
      * @param  \App\Models\Chief  $chief
      * @return \Illuminate\Http\Response
      */
-    public function update(ChiefRequest $request, Chief $chief)
+    public function update(UpdateChiefRequest $request, Chief $chief)
     {
         //
+        $chief->update($request->validated());
+
+        return to_route('chief.index')->with('message', 'Chief Edited Successfull');;
     }
 
     /**
@@ -100,5 +110,7 @@ class ChiefController extends Controller
     public function destroy(Chief $chief)
     {
         //
+        $chief->delete();
+        return back()->with('message', 'Chief Deleted Successfull');
     }
 }

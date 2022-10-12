@@ -8,33 +8,30 @@
     import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
     import { ref } from 'vue';
 
-    const props =defineProps({
-            chief: Object,
-    });
-    
     const form = useForm({
-        name: props.chief.name,
-        district: props.chief.district,
-        chieftainship:props.chief.chieftainship,
-        mutupo:props.chief.mutupo,
-        incumbent: props.chief.incumbent,
-        idnumber:props.chief.idnumber,
-        ecnumber:props.chief.ecnumber,
-        gender:props.chief.gender,
-        dateofbirth:props.chief.dateofbirth,
-        dateofappointment:props.chief.dateofappointment,
-        status:props.chief.status,
-        contactnumber:props.chief.contactnumber,
-        numberofheadman:props.chief.numberofheadman,
-        numberofwards:props.chief.numberofwards,
-        numberofvillages: props.chief.numberofvillages,
-        dateofdeathorremoval:props.chief.dateofdeathorremoval,
-        physicalladdress:props.chief.physicalladdress,
+    name: '',
+    district:'',
+    chieftainship:'',
+    mutupo:'',
+    incumbent:'',
+    idnumber:'',
+    ecnumber:'',
+    gender:'',
+    dateofbirth:'',
+    dateofappointment:'',
+    status:'',
+    contactnumber:'',
+    numberofheadman:'',
+    numberofwards:'',
+    numberofvillages:'',
+    dateofdeathorremoval:'',
+    physicalladdress:'',
+    
     });
 
     
     const submit = () => {
-          form.put(route("chief.update", props.chief.slug));
+        form.post(route("chief.store"));
     };
     </script>
     
@@ -166,7 +163,7 @@
                             </div>
                             <div class="flex items-center justify-end mt-4">
                                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                    Update Chief
+                                    ADD Chief
                                 </PrimaryButton>
                             </div>
                         </form>
