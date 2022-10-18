@@ -37,7 +37,7 @@ class VillageheadController extends Controller
                 'slug' => $villagehead->slug,
             ]);
         $filters = Request::only(['search']);
-        return Inertia::render("Backend/Villagehead/Index", compact('villageheads', 'filters'));
+        return Inertia::render("Backend/VillageHead/Index", compact('villageheads', 'filters'));
     }
 
     /**
@@ -48,7 +48,7 @@ class VillageheadController extends Controller
     public function create()
     {
         //
-        return Inertia::render("Backend/Villagehead/Create");
+        return Inertia::render("Backend/VillageHead/Create");
     }
 
     /**
@@ -60,7 +60,8 @@ class VillageheadController extends Controller
     public function store(VillageheadRequest $request)
     {
         //
-        villagehead::create($request->validated());
+
+        Villagehead::create($request->validated());
         return to_route('villagehead.index')->with('message', 'villagehead Created Successfull');
     }
     /**

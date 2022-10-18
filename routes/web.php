@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ChiefController;
 use App\Http\Controllers\HeadmanController;
-use App\Models\Chief;
+use App\Http\Controllers\VillageheadController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     })->name('dashboard');
     Route::resource(name: '/chief', controller: ChiefController::class);
     Route::resource(name: '/headman', controller: HeadmanController::class);
+    Route::resource(name: '/villagehead', controller: VillageheadController::class);
 });
 
 require __DIR__ . '/auth.php';

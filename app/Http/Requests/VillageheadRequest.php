@@ -13,7 +13,7 @@ class VillageheadRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,22 @@ class VillageheadRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            //
+            'name' => ['required'],
+            'district' => ['required'],
+            'headmanship' => ['required'],
+            'mutupo' => ['required'],
+            'incumbent' => ['required'],
+            'gender' => ['required'],
+            'idnumber' => ['required', 'unique:chiefs'],
+            'dateofbirth' => ['required'],
+            'dateofappointment' => ['required'],
+            'status' => ['required'],
+            'contactnumber' => ['required'],
+            'bankdetails' => ['required'],
+            'numberofhousehold' => ['required', 'numeric'],
+            'dateofdeathorremoval' => ['required'],
         ];
     }
 }
