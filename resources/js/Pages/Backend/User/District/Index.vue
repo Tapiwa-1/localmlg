@@ -1,47 +1,18 @@
-<script setup>
-    import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-    import Pagination from '@/Components/Pagination.vue';
-    import { Head, Link } from '@inertiajs/inertia-vue3';
-    import { Inertia } from '@inertiajs/inertia';
-    import {ref, watch, defineProps} from 'vue';
-    const props = defineProps({
-    chiefs: Object,
-    filters: Object
-    });
-    let search = ref(props.filters.search);
+<template>
+    <Head title="Dashboard" />
 
-    watch (search, value =>{
-      Inertia.get('/chief', {search:value},{
-      preserveState: true,
-      replace: true
-    });
-    })
-    </script>
-    
-    <template>
-        <Head title="Dashboard" />
-        <div v-if="$page.props.flash.message" class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
-            <span class="font-medium">Success!</span> {{ $page.props.flash.message }}
+    <AuthenticatedLayout>
+        <template #header>
+          <Usernav/>
+        </template>
 
-        </div>
-    
-        <AuthenticatedLayout>
-            <template #header>
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Chief
-                </h2>
-                
-            </template>
-    
-            <div class="py-12">
+        
+        <div class="py-12">
                 
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class=" grid grid-cols-2 gap-20">
                         <div>
-                            <Link type="button" class="ml-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.create')">Add Chief</Link>
-                            <a type="button" class="ml-auto text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('generatepdf')">Generate PDF</a>
-                            <Link type="button" class="ml-auto text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.create')">Generate Excel</Link>
-
+                            <Link type="button" class="ml-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('district.create')">Add District Officer</Link>
                         </div>
                         <div>
                           
@@ -68,13 +39,13 @@
                                     Name
                                 </th>
                                 <th scope="col" class="py-3 px-6">
+                                    email
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Provice
+                                </th>
+                                <th scope="col" class="py-3 px-6">
                                     District
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Chieftainship
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Gender
                                 </th>
                                 <th scope="col" class="py-3 px-6">
                                     Action
@@ -82,7 +53,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="chief in chiefs.data" :key="chief.slug"  class="bg-white border-b">
+                            <!-- <tr v-for="chief in chiefs.data" :key="chief.slug"  class="bg-white border-b">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
                                     {{chief.name}}
                                 </th>
@@ -101,18 +72,29 @@
                                     <Link type="button" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.edit', chief.slug)">Edit</Link>
                                     <Link type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" method="delete" as="button" ae :href="route('chief.destroy', chief.slug)" >Delete</Link>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
                 
                     </div>
                     <div class="m-2 p-2">
-                    <Pagination :links="chiefs.links"/>
+                    <!-- <Pagination :links="chiefs.links"/> -->
             
                 </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
-    </template>
-    
+    </AuthenticatedLayout>
+</template>
+
+
+<script setup>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Link } from '@inertiajs/inertia-vue3';
+import Usernav from '@/Components/Usersnav.vue'
+
+</script>
+
+<style>
+
+</style>

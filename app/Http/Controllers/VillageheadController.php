@@ -111,7 +111,7 @@ class VillageheadController extends Controller
      * @param  \App\Models\villagehead  $villagehead
      * @return \Illuminate\Http\Response
      */
-    public function destroy(villagehead $villagehead)
+    public function destroy(Villagehead $villagehead)
     {
         //
         $villagehead->delete();

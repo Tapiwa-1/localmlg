@@ -11,7 +11,6 @@
     const form = useForm({
     name: '',
     district:'',
-    headmantainship:'',
     headmanship:'',
     mutupo:'',
     incumbent:'',

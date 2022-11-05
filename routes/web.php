@@ -3,6 +3,9 @@
 use App\Http\Controllers\ChiefController;
 use App\Http\Controllers\HeadmanController;
 use App\Http\Controllers\VillageheadController;
+use App\Http\Controllers\TownofficerController;
+use App\Http\Controllers\ProvincialofficerController;
+use App\Http\Controllers\DistrictofficerController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,8 +37,16 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
     Route::resource(name: '/chief', controller: ChiefController::class);
+    Route::get('generate-pdf', [ChiefController::class, 'generatePDF'])->name('generatepdf');
     Route::resource(name: '/headman', controller: HeadmanController::class);
     Route::resource(name: '/villagehead', controller: VillageheadController::class);
+    Route::resource(name: '/user/townoffice', controller: TownofficerController::class);
+    Route::resource(name: '/user/provincial', controller: ProvincialofficerController::class);
+    Route::resource(name: '/user/district', controller: DistrictofficerController::class);
+
+    Route::get('/user', function () {
+        return Inertia::render('Backend/User/Index');
+    })->name('users');
 });
 
 require __DIR__ . '/auth.php';

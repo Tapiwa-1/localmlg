@@ -30,7 +30,7 @@ return new class extends Migration
             $table->integer('numberofheadman');
             $table->integer('numberofwards');
             $table->integer('numberofvillages');
-            $table->date('dateofdeathorremoval');
+            $table->date('dateofdeathorremoval')->nullable();
             $table->string('physicalladdress');
             $table->string('slug')->unique();
             $table->timestamps();

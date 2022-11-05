@@ -40,7 +40,7 @@ class ChiefRequest extends FormRequest
             'numberofheadman' => ['required', 'numeric'],
             'numberofwards' => ['required', 'numeric'],
             'numberofvillages' => ['required', 'numeric'],
-            'dateofdeathorremoval' => ['required'],
+            'dateofdeathorremoval' => ['nullable', 'date'],
             'physicalladdress' => ['required'],
 
         ];

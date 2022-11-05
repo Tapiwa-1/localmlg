@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChiefRequest;
 use App\Http\Requests\UpdateChiefRequest;
 use App\Models\Chief;
-// use Illuminate\Http\Request;
+
+use PDF;
+
+use Illuminate\Http\Request as Req;
 use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ChiefController extends Controller
 {
@@ -16,6 +20,7 @@ class ChiefController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -35,6 +40,15 @@ class ChiefController extends Controller
             ]);
         $filters = Request::only(['search']);
         return Inertia::render("Backend/Chief/Index", compact('chiefs', 'filters'));
+    }
+
+    public function generatePDF(Req $request)
+    {
+        $chiefs = Chief::all();
+        $pdf = PDF::loadView('chiefs', compact('chiefs'));
+        // download PDF file with download method
+        // return Excel::download(new ExportUser, 'users.xlsx');
+        return $pdf->download('pdf_file.pdf');
     }
 
     /**

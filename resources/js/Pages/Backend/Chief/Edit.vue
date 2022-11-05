@@ -11,6 +11,11 @@
     const props =defineProps({
             chief: Object,
     });
+
+    let removedordied = ref(false);
+    function removed(){
+        removedordied.value = !removedordied.value;
+    }
     
     const form = useForm({
         name: props.chief.name,
@@ -153,10 +158,18 @@
                                     <TextInput id="numberofvillages" type="number" class="mt-1 block w-full" v-model="form.numberofvillages" required autofocus autocomplete="numberofvillages" />
                                     <InputError class="mt-2" :message="form.errors.numberofvillages" />
                                 </div>
+                                
                                 <div class="flex-auto mx-2">
-                                    <InputLabel for="dateofdeathorremoval" value="Date of Death or Removal" />
-                                    <TextInput id="dateofdeathorremoval" type="date" class="mt-1 block w-full" v-model="form.dateofdeathorremoval" required autofocus autocomplete="dateofdeathorremoval" />
-                                    <InputError class="mt-2" :message="form.errors.dateofdeathorremoval" />
+                                    <div class="flex items-center mb-4">
+                                        <input @click="removed" id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900">Chief removed or died</label>
+                                    </div>
+                                    <div v-if="removedordied" class="">
+                                        <InputLabel for="dateofdeathorremoval" value="Date of Death or Removal" />
+                                        <TextInput id="dateofdeathorremoval" type="date" class="mt-1 block w-full" v-model="form.dateofdeathorremoval" required autofocus autocomplete="dateofdeathorremoval" />
+                                        <InputError class="mt-2" :message="form.errors.dateofdeathorremoval" />
+                                    </div>
+                                   
                                 </div>
                             </div>
                             <div class="">
