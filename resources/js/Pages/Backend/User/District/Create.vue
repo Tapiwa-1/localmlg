@@ -6,10 +6,10 @@
           <Usernav/>
         </template>
 
-        
+
         <div class="p-4 max-w-sm m-auto bg-white border rounded mt-4 ">
-                
-               
+
+
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="name" value="Name" />
@@ -50,7 +50,7 @@
                 </select>
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
-        
+
             <div  class="flex items-center justify-end mt-4">
                 <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
                     Already registered?
