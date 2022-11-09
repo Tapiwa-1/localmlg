@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('chiefs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('district');
+            $table->string('province');
             $table->string('chieftainship');
             $table->string('mutupo');
             $table->string('incumbent');

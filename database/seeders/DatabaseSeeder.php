@@ -15,18 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(1)->create();
-        // \App\Models\Chief::factory(200)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@gmail.com',
-        //     'password' => Hash::make('test@123'),
-        // ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@gmail.com',
+            'password' => Hash::make('test@123'),
+        ]);
 
         $this->call([
             DistrictSeeder::class,
-            ProvincialSeeder::class
         ]);
     }
 }

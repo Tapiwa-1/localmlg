@@ -62,8 +62,8 @@
         removedordied.value = !removedordied.value;
     }
     const form = useForm({
-    name: '',
     district:'',
+    province:'',
     chieftainship:'',
     mutupo:'',
     incumbent:'',
@@ -129,30 +129,40 @@
                             </div>
                             <div class="md:grid md:grid-cols-2 gap-2">
                                 <div class="flex-auto mx-2">
-                                     <InputLabel for="password_confirmation" value="Choose Province" />
-                                    <select v-model="form.province"  @click="DistFun" style="width:100%" class="border-gray-300 w-100 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="province" id="provice">
+                                        <InputLabel for="password_confirmation" value="Choose Province" />
+                                        <select v-model="form.province"  @click="DistFun" style="width:100%" class="border-gray-300 w-100 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="province" id="provice">
                                             <option class="w-100"  value="">Select</option>
-                                            <option  v-for="(value,key) in Zimdetails" :key="key" :value="value">{{key}}</option>
+                                           <option  v-for="(value,key) in Zimdetails" :key="key" :value="value">{{key}}</option>
                                         </select>
-                                        <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                                        <InputError class="mt-2" :message="form.errors.province" />
 
                                 </div>
                                 <div class="flex-auto mx-2" v-if="!District">
                                     <InputLabel for="password_confirmation" value="Now select district" />
-                                    <select  style="width:100%" class="border-gray-300 w-100 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="province" id="provice">
+                                    <select v-model="form.district" style="width:100%" class="border-gray-300 w-100 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="province" id="provice">
                                             <option class="w-100"  value="">Select</option>
-                                            <option  v-for="province in form.province" :key="province" value="province">{{province}}</option>
+                                            <option  v-for="district in form.province" :key="district" :value="district">{{district}}</option>
                                     </select>
+                                    <InputError class="mt-2" :message="form.errors.province" />
+                                </div>
+                            </div>
+                            <div class="md:grid md:grid-cols-2 gap-2">
+                                <div class="flex-auto mx-2">
                                     <InputError class="mt-2" :message="form.errors.password_confirmation" /><InputLabel for="Idnumber" value="Id Number" />
                                     <TextInput id="idnumber" type="text" class="mt-1 block w-full" v-model="form.idnumber" required autofocus autocomplete="idnumber" />
                                     <InputError class="mt-2" :message="form.errors.idnumber" />
+                                </div>
+                                <div class="flex-auto mx-2">
+                                    <InputLabel for="status" value="Status" />
+                                    <TextInput id="status" type="text" class="mt-1 block w-full" v-model="form.status" required autofocus autocomplete="status" />
+                                    <InputError class="mt-2" :message="form.errors.status" />
                                 </div>
                             </div>
                             <div class="md:grid md:grid-cols-2 gap-2">
                                 <div class="flex-auto mx-2 w-100">
                                    <InputLabel for="dateofbirth" value="Date Of Birth" />
                                     <TextInput id="dateofbirth" type="date" class="mt-1 block w-full" v-model="form.dateofbirth" required autofocus autocomplete="dateofbirth" />
-                                    <InputError class="mt-2" :message="form.errors.dateofbirth" /> <InputLabel for="ecnumber" value="EC number" />
+                                    <InputError class="mt-2" :message="form.errors.dateofbirth" />
 
                                 </div>
                                 <div class="flex-auto mx-2 w-100 pt-4">
@@ -171,47 +181,12 @@
                                     <InputError class="mt-2" :message="form.errors.gender" />
                                 </div>
                             </div>
+
                             <div class="md:grid md:grid-cols-2 gap-2">
-                                <div class="flex-auto mx-2">
-                                    <InputLabel for="dateofbirth" value="Date Of Birth" />
-                                    <TextInput id="dateofbirth" type="date" class="mt-1 block w-full" v-model="form.dateofbirth" required autofocus autocomplete="dateofbirth" />
-                                    <InputError class="mt-2" :message="form.errors.dateofbirth" />
-                                </div>
-                                <div class="flex-auto mx-2">
+                                 <div class="flex-auto mx-2">
                                     <InputLabel for="dateofappointment" value="Date Of Appointment" />
                                     <TextInput id="dateofappointment" type="date" class="mt-1 block w-full" v-model="form.dateofappointment" required autofocus autocomplete="dateofappointment" />
                                     <InputError class="mt-2" :message="form.errors.dateofappointment" />
-                                </div>
-                            </div>
-                            <div class="md:flex">
-                                <div class="flex-auto mx-2">
-                                    <InputLabel for="status" value="Status" />
-                                    <TextInput id="status" type="text" class="mt-1 block w-full" v-model="form.status" required autofocus autocomplete="status" />
-                                    <InputError class="mt-2" :message="form.errors.status" />
-                                </div>
-                                <div class="flex-auto mx-2">
-                                    <InputLabel for="contactnumber" value="Contact number" />
-                                    <TextInput id="contactnumber" type="text" class="mt-1 block w-full" v-model="form.contactnumber" required autofocus autocomplete="contactnumber" />
-                                    <InputError class="mt-2" :message="form.errors.contactnumber" />
-                                </div>
-                            </div>
-                            <div class="md:flex">
-                                <div class="flex-auto mx-2">
-                                    <InputLabel for="numberofheadman" value="Number Of Headman" />
-                                    <TextInput id="numberofheadman" type="number" class="mt-1 block w-full" v-model="form.numberofheadman" required autofocus autocomplete="numberofheadman" />
-                                    <InputError class="mt-2" :message="form.errors.numberofheadman" />
-                                </div>
-                                <div class="flex-auto mx-2">
-                                    <InputLabel for="numberofwards" value="Number Of Wards" />
-                                    <TextInput id="numberofwards" type="number" class="mt-1 block w-full" v-model="form.numberofwards" required autofocus autocomplete="numberofwards" />
-                                    <InputError class="mt-2" :message="form.errors.numberofwards" />
-                                </div>
-                            </div>
-                            <div class="md:grid md:grid-cols-2 gap-2">
-                                <div class="flex-auto mx-2">
-                                    <InputLabel for="numberofvillages" value="Numberof Villages" />
-                                    <TextInput id="numberofvillages" type="number" class="mt-1 block w-full" v-model="form.numberofvillages" required autofocus autocomplete="numberofvillages" />
-                                    <InputError class="mt-2" :message="form.errors.numberofvillages" />
                                 </div>
                                 <div class="flex-auto mx-2">
                                     <div class="flex items-center mb-4">
@@ -224,12 +199,42 @@
                                         <InputError class="mt-2" :message="form.errors.dateofdeathorremoval" />
                                     </div>
                                 </div>
+
                             </div>
-                            <div class="">
+                            <div class="md:flex">
+                                <div class="flex-auto mx-2">
+                                    <InputLabel for="contactnumber" value="Contact number" />
+                                    <TextInput id="contactnumber" type="text" class="mt-1 block w-full" v-model="form.contactnumber" required autofocus autocomplete="contactnumber" />
+                                    <InputError class="mt-2" :message="form.errors.contactnumber" />
+                                </div>
+                                <div class="flex-auto mx-2">
+                                    <InputLabel for="numberofheadman" value="Number Of Headman" />
+                                    <TextInput id="numberofheadman" type="number" class="mt-1 block w-full" v-model="form.numberofheadman" required autofocus autocomplete="numberofheadman" />
+                                    <InputError class="mt-2" :message="form.errors.numberofheadman" />
+                                </div>
+                            </div>
+                            <div class="md:flex">
+                                <div class="flex-auto mx-2">
+                                    <InputLabel for="numberofwards" value="Number Of Wards" />
+                                    <TextInput id="numberofwards" type="number" class="mt-1 block w-full" v-model="form.numberofwards" required autofocus autocomplete="numberofwards" />
+                                    <InputError class="mt-2" :message="form.errors.numberofwards" />
+                                </div>
+                                <div class="flex-auto mx-2">
+                                    <InputLabel for="numberofvillages" value="Numberof Villages" />
+                                    <TextInput id="numberofvillages" type="number" class="mt-1 block w-full" v-model="form.numberofvillages" required autofocus autocomplete="numberofvillages" />
+                                    <InputError class="mt-2" :message="form.errors.numberofvillages" />
+                                </div>
+                            </div>
+                            <div class="md:grid md:grid-cols-2 gap-2">
+
+                                <div class="flex-auto mx-2">
                                     <InputLabel for="physicalladdress" value="Physical Address" />
-                                    <textarea name="physicalladdress" id=""  class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full" cols="30" rows="4" v-model="form.physicalladdress" autocomplete="physicalladdress" autofocus required ></textarea>
-                                    <InputError class="mt-2" :message="form.errors.name" />
+                                    <!-- <TextInput name="physicalladdress" id=""  class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full" cols="30" rows="4" v-model="form.physicalladdress" autocomplete="physicalladdress" autofocus required ></textarea> -->
+                                    <TextInput id="physicaladdress" type="text" class="mt-1 block w-full" v-model="form.physicalladdress"  autofocus autocomplete="physicalladdressdateofdeathorremoval" />
+                                    <InputError class="mt-2" :message="form.errors.physicalladdressname" />
+                                </div>
                             </div>
+
                             <div class="flex items-center justify-end mt-4">
                                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                     ADD Chief

@@ -12,7 +12,7 @@ class Chief extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'province',
         'district',
         'chieftainship',
         'mutupo',
@@ -41,7 +41,7 @@ class Chief extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'incumbent'
             ]
         ];
     }

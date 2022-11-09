@@ -25,8 +25,8 @@ class ChiefRequest extends FormRequest
     {
         return [
             //
-            'name' => ['required'],
             'district' => ['required'],
+            'province' => ['required'],
             'chieftainship' => ['required'],
             'mutupo' => ['required'],
             'incumbent' => ['required'],

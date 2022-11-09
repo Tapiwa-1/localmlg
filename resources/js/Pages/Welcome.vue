@@ -30,13 +30,13 @@ defineProps({
                 <div>
                     <ApplicationLogo/>
                 </div>
-                <div class=" w-100" > 
+                <div class=" w-100" >
                     <div class="m-auto">
-                        <h1 class="font-bold text-4xl" >Ministry of Local Govement Traditions Portal</h1>
+                        <h1 class="font-bold text-4xl" >Tradional Leaders Portal</h1>
                     </div>
                 </div>
             </div>
-         
+
 
         </div>
     </div>

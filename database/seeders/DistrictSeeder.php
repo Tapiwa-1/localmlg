@@ -20,263 +20,263 @@ class DistrictSeeder extends Seeder
             [
                 [
                     'name' => 'Harare',
-                    'provincal_id' => 1
+                    'province' => 'Harare'
                 ],
                 [
                     'name' => 'Bulawayo',
-                    'provincal_id' => 2
+                    'province' => 'Bulawayo'
                 ],
                 [
                     'name' => 'Buhera',
-                    'provincal_id' => 3
+                    'province' =>'Manicaland'
                 ],
                 [
                     'name' => 'Chimanimani',
-                    'provincal_id' => 3
+                    'province' =>'Manicaland'
                 ],
                 [
                     'name' => 'Chipinge',
-                    'provincal_id' => 3
+                    'province' =>'Manicaland'
                 ],
                 [
                     'name' => 'Makoni',
-                    'provincal_id' => 3
+                    'province' =>'Manicaland'
                 ],
                 [
                     'name' => 'Mutare',
-                    'provincal_id' => 3
+                    'province' =>'Manicaland'
                 ],
                 [
                     'name' => 'Mutasa',
-                    'provincal_id' => 3
+                    'province' =>'Manicaland'
                 ],
                 [
                     'name' => 'Nyanga',
-                    'provincal_id' => 3
+                    'province' =>'Manicaland'
                 ],
                 [
                     'name' => 'Bindura',
-                    'provincal_id' => 4
+                    'province' =>'Mashonaland_Cental'
                 ],
                 [
                     'name' => 'Guruve',
-                    'provincal_id' => 4
+                    'province' =>'Mashonaland_Cental'
                 ],
                 [
                     'name' => 'Mazowe',
-                    'provincal_id' => 4
+                    'province' =>'Mashonaland_Cental'
                 ],
                 [
                     'name' => 'Mbire',
-                    'provincal_id' => 4
+                    'province' =>'Mashonaland_Cental'
                 ],
                 [
                     'name' => 'Mount Darwin',
-                    'provincal_id' => 4
+                    'province' =>'Mashonaland_Cental'
                 ],
                 [
                     'name' => 'Muzarabani',
-                    'provincal_id' => 4
+                    'province' =>'Mashonaland_Cental'
                 ],
                 [
                     'name' => 'Mukumbura',
-                    'provincal_id' => 4
+                    'province' =>'Mashonaland_Cental'
                 ],
                 [
                     'name' => 'Rushinga',
-                    'provincal_id' => 4
+                    'province' =>'Mashonaland_Cental'
                 ],
                 [
                     'name' => 'Shamva',
-                    'provincal_id' => 4
+                    'province' =>'Mashonaland_Cental'
                 ],
                 [
                     'name' => 'Chikomba',
-                    'provincal_id' => 5
+                    'province' => 'Mashonaland_East'
                 ],
                 [
                     'name' => 'Goromonzi',
-                    'provincal_id' => 5
+                    'province' => 'Mashonaland_East'
                 ],
                 [
                     'name' => 'Marondera',
-                    'provincal_id' => 5
+                    'province' => 'Mashonaland_East'
                 ],
                 [
                     'name' => 'Mudzi',
-                    'provincal_id' => 5
+                    'province' => 'Mashonaland_East'
                 ],
                 [
                     'name' => 'Murehwa',
-                    'provincal_id' => 5
+                    'province' => 'Mashonaland_East'
                 ],
                 [
                     'name' => 'Mutoko',
-                    'provincal_id' => 5
+                    'province' => 'Mashonaland_East'
                 ],
                 [
                     'name' => 'Seke',
-                    'provincal_id' => 5
+                    'province' => 'Mashonaland_East'
                 ],
                 [
                     'name' => 'UMP (Uzumba-Maramba-Pfungwe)',
-                    'provincal_id' => 5
+                    'province' => 'Mashonaland_East'
                 ],
                 [
                     'name' => 'Wedza (Hwedza)',
-                    'provincal_id' => 5
+                    'province' => 'Mashonaland_East'
                 ],
                 [
                     'name' => 'Chegutu',
-                    'provincal_id' => 6
+                    'province' => 'Mashonaland_West'
                 ],
                 [
                     'name' => 'Hurungwe',
-                    'provincal_id' => 6
+                    'province' => 'Mashonaland_West'
                 ],
                 [
                     'name' => 'Kariba',
-                    'provincal_id' => 6
+                    'province' => 'Mashonaland_West'
                 ],
                 [
                     'name' => 'Makonde',
-                    'provincal_id' => 6
+                    'province' => 'Mashonaland_West'
                 ],
                 [
                     'name' => 'Mhondoro-Ngezi',
-                    'provincal_id' => 6
+                    'province' => 'Mashonaland_West'
                 ],
                 [
                     'name' => 'Sanyati',
-                    'provincal_id' => 6
+                    'province' => 'Mashonaland_West'
                 ],
                 [
                     'name' => 'Zvimba',
-                    'provincal_id' => 6
+                    'province' => 'Mashonaland_West'
                 ],
                 [
                     'name' => 'Kadoma',
-                    'provincal_id' => 6
+                    'province' => 'Mashonaland_West'
                 ],
                 [
                     'name' => 'Chinhoyi',
-                    'provincal_id' => 6
+                    'province' => 'Mashonaland_West'
                 ],
                 [
                     'name' => 'Bikita',
-                    'provincal_id' => 7
+                    'province' => 'Masvingo'
                 ],
                 [
                     'name' => 'Chiredzi',
-                    'provincal_id' => 7
+                    'province' => 'Masvingo'
                 ],
                 [
                     'name' => 'Chivi',
-                    'provincal_id' => 7
+                    'province' => 'Masvingo'
                 ],
                 [
                     'name' => 'Gutu',
-                    'provincal_id' => 7
+                    'province' => 'Masvingo'
                 ],
                 [
                     'name' => 'Masvingo',
-                    'provincal_id' => 7
+                    'province' => 'Masvingo'
                 ],
                 [
                     'name' => 'Mwenezi',
-                    'provincal_id' => 7
+                    'province' => 'Masvingo'
                 ],
                 [
                     'name' => 'Zaka',
-                    'provincal_id' => 7
+                    'province' => 'Masvingo'
                 ],
                 [
                     'name' => 'Binga',
-                    'provincal_id' => 8
+                    'province' => 'Matebeleland_North'
                 ],
                 [
                     'name' => 'Bubi',
-                    'provincal_id' => 8
+                    'province' => 'Matebeleland_North'
                 ],
                 [
                     'name' => 'Hwange',
-                    'provincal_id' => 8
+                    'province' => 'Matebeleland_North'
                 ],
                 [
                     'name' => 'Lupane',
-                    'provincal_id' => 8
+                    'province' => 'Matebeleland_North'
                 ],
                 [
                     'name' => 'Nkayi',
-                    'provincal_id' => 8
+                    'province' => 'Matebeleland_North'
                 ],
                 [
                     'name' => 'Tsholotsho',
-                    'provincal_id' => 8
+                    'province' => 'Matebeleland_North'
                 ],
                 [
                     'name' => 'Umguza',
-                    'provincal_id' => 8
+                    'province' => 'Matebeleland_North'
                 ],
                 [
                     'name' => 'Beitbridge',
-                    'provincal_id' => 9
+                    'province' => 'Matebeleland_South'
                 ],
                 [
                     'name' => 'Bulilima',
-                    'provincal_id' => 9
+                    'province' => 'Matebeleland_South'
                 ],
                 [
                     'name' => 'Gwanda',
-                    'provincal_id' => 9
+                    'province' => 'Matebeleland_South'
                 ],
                 [
                     'name' => 'Insiza',
-                    'provincal_id' => 9
+                    'province' => 'Matebeleland_South'
                 ],
                 [
                     'name' => 'Mangwe',
-                    'provincal_id' => 9
+                    'province' => 'Matebeleland_South'
                 ],
                 [
                     'name' => 'Matobo',
-                    'provincal_id' => 9
+                    'province' => 'Matebeleland_South'
                 ],
                 [
                     'name' => 'Umzingwane',
-                    'provincal_id' => 9
+                    'province' => 'Matebeleland_South'
                 ],
                 [
                     'name' => 'Chirumhanzu',
-                    'provincal_id' => 10
+                    'province' => 'Midlands'
                 ],
                 [
-                    'name' => 'Gokwe North',
-                    'provincal_id' => 10
+                    'name' => 'Gokwe_North',
+                    'province' => 'Midlands'
                 ],
                 [
-                    'name' => 'Gokwe South',
-                    'provincal_id' => 10
+                    'name' => 'Gokwe_South',
+                    'province' => 'Midlands'
                 ],
                 [
                     'name' => 'Gweru',
-                    'provincal_id' => 10
+                    'province' => 'Midlands'
                 ],
                 [
                     'name' => 'Kwekwe',
-                    'provincal_id' => 10
+                    'province' => 'Midlands'
                 ],
                 [
                     'name' => 'Mberengwa',
-                    'provincal_id' => 10
+                    'province' => 'Midlands'
                 ],
                 [
                     'name' => 'Shurugwi',
-                    'provincal_id' => 10
+                    'province' => 'Midlands'
                 ],
                 [
                     'name' => 'Zvishavane',
-                    'provincal_id' => 10
+                    'province' => 'Midlands'
                 ],
             ]
         );

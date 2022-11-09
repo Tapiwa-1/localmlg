@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChiefRequest;
 use App\Http\Requests\UpdateChiefRequest;
 use App\Models\Chief;
+use App\Models\District;
+use Illuminate\Http\Request;
 
 use PDF;
 
 use Illuminate\Http\Request as Req;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Request as FReq;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -25,20 +27,20 @@ class ChiefController extends Controller
     {
         //
         $chiefs = Chief::query()
-            ->when(Request::input('search'), function ($query, $search) {
-                $query->where('name', 'like', "%{$search}%");
+            ->when(FReq::input('search'), function ($query, $search) {
+                $query->where('chieftainship', 'like', "%{$search}%");
             })
             ->paginate(5)
             ->withQueryString()
             ->through(fn ($chief) => [
                 'id' => $chief->id,
-                'name' => $chief->name,
+                'province' => $chief->province,
                 'district' => $chief->district,
                 'chieftainship' => $chief->chieftainship,
-                'gender' => $chief->gender,
+                'incumbent' => $chief->incumbent,
                 'slug' => $chief->slug,
             ]);
-        $filters = Request::only(['search']);
+        $filters = FReq::only(['search']);
         return Inertia::render("Backend/Chief/Index", compact('chiefs', 'filters'));
     }
 
@@ -69,10 +71,51 @@ class ChiefController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ChiefRequest $request)
+    public function store(Request $request)
     {
         //
-        Chief::create($request->validated());
+        $validated = $request->validate([
+            'district' => 'required',
+            'province' => 'required',
+            'chieftainship' => 'required',
+            'mutupo' => 'required',
+            'incumbent' => 'required',
+            'idnumber' => 'required | unique:chiefs',
+            'ecnumber' => 'required',
+            'gender' => 'required',
+            'dateofbirth' => 'required',
+            'dateofappointment' => 'required',
+            'status' => 'required',
+            'contactnumber' => 'required',
+            'numberofheadman' => 'required | numeric',
+            'numberofwards' => 'required | numeric',
+            'numberofvillages' => 'required | numeric',
+            'dateofdeathorremoval' => 'nullable',
+            'physicalladdress' => 'required',
+
+        ]);
+
+        $province = District::where('name', $request->district)->first();
+        // dd($province->province);
+        Chief::create([
+            'district' => $request->district,
+            'province' => $province->province,
+            'chieftainship' => $request->chieftainship,
+            'mutupo' => $request->mutupo,
+            'incumbent' => $request->incumbent,
+            'idnumber' => $request->idnumber,
+            'ecnumber' => $request->ecnumber,
+            'gender' => $request->gender,
+            'dateofbirth' => $request->dateofbirth,
+            'dateofappointment' => $request->dateofappointment,
+            'status' => $request->status,
+            'contactnumber' => $request->contactnumber,
+            'numberofheadman' => $request->numberofheadman,
+            'numberofwards' => $request->numberofwards,
+            'numberofvillages' => $request->numberofvillages,
+            'dateofdeathorremoval' => $request->dateofdeathorremoval,
+            'physicalladdress' => $request->physicalladdress,
+        ]);
         return to_route('chief.index')->with('message', 'Chief Created Successfull');
     }
 
@@ -107,10 +150,48 @@ class ChiefController extends Controller
      * @param  \App\Models\Chief  $chief
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateChiefRequest $request, Chief $chief)
+    public function update(Request $request, Chief $chief)
     {
         //
-        $chief->update($request->validated());
+        $validated = $request->validate([
+            'district' => 'required',
+            'province' => 'required',
+            'chieftainship' => 'required',
+            'mutupo' => 'required',
+            'incumbent' => 'required',
+            'idnumber' => 'required | unique:chiefs',
+            'ecnumber' => 'required',
+            'gender' => 'required',
+            'dateofbirth' => 'required',
+            'dateofappointment' => 'required',
+            'status' => 'required',
+            'contactnumber' => 'required',
+            'numberofheadman' => 'required | numeric',
+            'numberofwards' => 'required | numeric',
+            'numberofvillages' => 'required | numeric',
+            'dateofdeathorremoval' => 'nullable',
+            'physicalladdress' => 'required',
+
+        ]);
+        $province = District::where('name', $request->district)->first();
+        $chief->update([
+            'district' => $request->district,
+            'province' => $province->province,
+            'chieftainship' => $request->chieftainship,
+            'mutupo' => $request->mutupo,
+            'incumbent' => $request->incumbent,
+            'idnumber' => $request->idnumber,
+            'ecnumber' => $request->ecnumber,
+            'gender' => $request->gender,
+            'dateofbirth' => $request->dateofbirth,
+            'dateofappointment' => $request->dateofappointment,
+            'status' => $request->status,
+            'contactnumber' => $request->contactnumber,
+            'numberofheadman' => $request->numberofheadman,
+            'numberofwards' => $request->numberofwards,
+            'numberofvillages' => $request->numberofvillages,
+            'dateofdeathorremoval' => $request->dateofdeathorremoval,
+        ]);
 
         return to_route('chief.index')->with('message', 'Chief Edited Successfull');;
     }

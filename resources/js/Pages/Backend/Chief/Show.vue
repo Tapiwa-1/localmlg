@@ -6,16 +6,16 @@
     });
 
     </script>
-    
+
     <template>
         <Head title="Dashboard" />
-    
+
         <AuthenticatedLayout>
             <template #header>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     Chief
                 </h2>
-                
+
             </template>
             <!-- name: '',
     :'',
@@ -39,16 +39,16 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                                            
+
                         <div class="overflow-x-auto relative">
                             <table class="w-full text-sm text-left text-gray-500 ">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 py-5">
                                     <tr class="">
                                         <th scope="col" class="py-3 px-6">
-                                            Name
+                                            Incumbent
                                         </th>
                                         <th scope="col" class="py-3 px-6">
-                                            {{chief.name}}
+                                            {{chief.incumbent}}
                                         </th>
 
                                     </tr>
@@ -56,12 +56,21 @@
                                 <tbody>
                                     <tr class="bg-white border-b  ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
+                                            Province
+                                        </th>
+                                        <td class="py-4 px-6">
+                                            {{chief.province}}
+                                        </td>
+
+                                    </tr>
+                                    <tr class="bg-white border-b  ">
+                                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
                                             District
                                         </th>
                                         <td class="py-4 px-6">
                                             {{chief.district}}
                                         </td>
-    
+
                                     </tr>
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
@@ -70,7 +79,7 @@
                                         <td class="py-4 px-6">
                                             {{chief.chieftainship}}
                                         </td>
-                                        
+
                                     </tr>
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
@@ -79,17 +88,9 @@
                                         <td class="py-4 px-6">
                                             {{chief.mutupo}}
                                         </td>
-                                        
+
                                     </tr>
-                                    <tr class="bg-white border-b ">
-                                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
-                                            Incumbent
-                                        </th>
-                                        <td class="py-4 px-6">
-                                            {{chief.incumbent}}
-                                        </td>
-                                        
-                                    </tr>
+
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
                                             Id Number
@@ -97,7 +98,7 @@
                                         <td class="py-4 px-6">
                                             {{chief.idnumber}}
                                         </td>
-                                        
+
                                     </tr>
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
@@ -106,7 +107,7 @@
                                         <td class="py-4 px-6">
                                             {{chief.ecnumber}}
                                         </td>
-                                        
+
                                     </tr>
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
@@ -115,7 +116,7 @@
                                         <td class="py-4 px-6">
                                             {{chief.gender}}
                                         </td>
-                                        
+
                                     </tr>
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
@@ -124,7 +125,7 @@
                                         <td class="py-4 px-6">
                                             {{chief.dateofbirth}}
                                         </td>
-                                        
+
                                     </tr>
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
@@ -133,7 +134,7 @@
                                         <td class="py-4 px-6">
                                             {{chief.dateofappointment}}
                                         </td>
-                                        
+
                                     </tr>
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
@@ -142,7 +143,7 @@
                                         <td class="py-4 px-6">
                                             {{chief.numberofvillages}}
                                         </td>
-                                        
+
                                     </tr>
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
@@ -151,7 +152,7 @@
                                         <td class="py-4 px-6">
                                             {{chief.contactnumber}}
                                         </td>
-                                        
+
                                     </tr>
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
@@ -160,7 +161,7 @@
                                         <td class="py-4 px-6">
                                             {{chief.numberofheadman}}
                                         </td>
-                                        
+
                                     </tr>
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
@@ -169,7 +170,7 @@
                                         <td class="py-4 px-6">
                                             {{chief.numberofwards}}
                                         </td>
-                                        
+
                                     </tr>
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
@@ -178,7 +179,7 @@
                                         <td class="py-4 px-6">
                                             {{chief.dateofdeathorremoval}}
                                         </td>
-                                        
+
                                     </tr>
                                     <tr class="bg-white border-b ">
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
@@ -206,4 +207,3 @@
         </div>
         </AuthenticatedLayout>
     </template>
-    
