@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\HeadmanRequest;
 use App\Http\Requests\HeadmanUpdateRequest;
 use App\Http\Requests\UpdateHeadmanRequest;
+use App\Models\District;
 use App\Models\Headman;
-// use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as FReq;// use Illuminate\Http\Request;
+
 use Inertia\Inertia;
 
 
@@ -23,20 +25,20 @@ class HeadmanController extends Controller
     {
         //
         $headmans = Headman::query()
-            ->when(Request::input('search'), function ($query, $search) {
-                $query->where('name', 'like', "%{$search}%");
-            })
-            ->paginate(5)
-            ->withQueryString()
-            ->through(fn ($headman) => [
-                'id' => $headman->id,
-                'name' => $headman->name,
-                'district' => $headman->district,
-                'headmanship' => $headman->headmanship,
-                'gender' => $headman->gender,
-                'slug' => $headman->slug,
-            ]);
-        $filters = Request::only(['search']);
+        ->when(FReq::input('search'), function ($query, $search) {
+            $query->where('incumbent', 'like', "%{$search}%");
+        })
+        ->paginate(5)
+        ->withQueryString()
+        ->through(fn ($headmans) => [
+            'id' => $headmans->id,
+            'province' => $headmans->province,
+            'district' => $headmans->district,
+            'headmanship' => $headmans->headmanship,
+            'incumbent' => $headmans->incumbent,
+            'slug' => $headmans->slug,
+        ]);
+        $filters = FReq::only(['search']);
         return Inertia::render("Backend/Headman/Index", compact('headmans', 'filters'));
     }
 
@@ -57,10 +59,52 @@ class HeadmanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(HeadmanRequest $request)
+    public function store(Request $request)
     {
         //
-        Headman::create($request->validated());
+             $validated = $request->validate([
+            'district' => 'required',
+            'province' => 'required',
+            'headmanship' =>'required',
+            'chieftainship' => 'required',
+            'mutupo' => 'required',
+            'incumbent' => 'required',
+            'idnumber' => 'required | unique:chiefs',
+            'ecnumber' => 'required',
+            'gender' => 'required',
+            'dateofbirth' => 'required',
+            'dateofappointment' => 'required',
+            'status' => 'required',
+            'contactnumber' => 'required',
+            'numberofhousehold'=>'required| numeric',
+            'numberofwards' => 'required | numeric',
+            'numberofvillages' => 'required | numeric',
+            'dateofdeathorremoval' => 'nullable',
+            'physicalladdress' => 'required',
+
+        ]);
+
+        $province = District::where('name', $request->district)->first();
+        Headman::create([
+            'district' => $request->district,
+            'province' => $province->province,
+            'headmanship' =>$request->headmanship,
+            'chieftainship' => $request->chieftainship,
+            'mutupo' => $request->mutupo,
+            'incumbent' => $request->incumbent,
+            'idnumber' => $request->idnumber,
+            'ecnumber' => $request->ecnumber,
+            'gender' => $request->gender,
+            'dateofbirth' => $request->dateofbirth,
+            'dateofappointment' => $request->dateofappointment,
+            'status' => $request->status,
+            'contactnumber' => $request->contactnumber,
+            'numberofhousehold' => $request->numberofhousehold,
+            'numberofwards' => $request->numberofwards,
+            'numberofvillages' => $request->numberofvillages,
+            'dateofdeathorremoval' => $request->dateofdeathorremoval,
+            'physicalladdress' => $request->physicalladdress,
+        ]);
         return to_route('headman.index')->with('message', 'Headman Created Successfull');
     }
     /**

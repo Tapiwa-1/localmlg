@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     })->name('dashboard');
     Route::resource(name: '/chief', controller: ChiefController::class);
     Route::get('generate-pdf', [ChiefController::class, 'generatePDF'])->name('generatepdf');
+    Route::get('fileexport',[ChiefController::class,'fileExport'])->name('fileexport');
     Route::resource(name: '/headman', controller: HeadmanController::class);
     Route::resource(name: '/villagehead', controller: VillageheadController::class);
     Route::resource(name: '/user/townoffice', controller: TownofficerController::class);

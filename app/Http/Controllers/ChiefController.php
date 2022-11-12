@@ -43,7 +43,10 @@ class ChiefController extends Controller
         $filters = FReq::only(['search']);
         return Inertia::render("Backend/Chief/Index", compact('chiefs', 'filters'));
     }
-
+    public function fileExport()
+    {
+        return Excel::download(new Chief, 'users-collection.xlsx');
+    }
     public function generatePDF(Req $request)
     {
         $chiefs = Chief::all();

@@ -15,7 +15,7 @@ class Headman extends Model
     protected $table = 'headmans';
 
     protected $fillable = [
-        'name',
+        'province',
         'district',
         'chieftainship',
         'headmanship',
@@ -45,7 +45,7 @@ class Headman extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'incumbent'
             ]
         ];
     }

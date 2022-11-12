@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('headmans', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('province');
             $table->string('district');
             $table->string('chieftainship');
             $table->string('headmanship');
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->integer('numberofhousehold');
             $table->integer('numberofwards');
             $table->integer('numberofvillages');
-            $table->date('dateofdeathorremoval');
+            $table->date('dateofdeathorremoval')->nullable();
             $table->string('physicalladdress');
             $table->string('slug')->unique();
             $table->timestamps();
