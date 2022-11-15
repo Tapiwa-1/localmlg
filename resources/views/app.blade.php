@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
-
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-        <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script> 
+        <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
         <!-- Scripts -->
         <script src="https://cdn.tailwindcss.com/"></script>
         @routes
