@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('villageheads', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('province');
             $table->string('district');
+            $table->string('chieftainship');
             $table->string('headmanship');
             $table->string('mutupo');
             $table->string('incumbent');
@@ -28,7 +29,7 @@ return new class extends Migration
             $table->string('contactnumber');
             $table->string('bankdetails');
             $table->integer('numberofhousehold');
-            $table->date('dateofdeathorremoval');
+            $table->date('dateofdeathorremoval')->nullable();
             $table->string('slug')->unique();
             $table->timestamps();
         });

@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\VillageheadRequest;
 use App\Http\Requests\VillageheadUpdateRequest;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as FReq;
+use App\Models\District;
 use App\Models\Villagehead;
 // use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Request;
+
 use Inertia\Inertia;
 
 
@@ -23,20 +26,21 @@ class VillageheadController extends Controller
     {
         //
         $villageheads = villagehead::query()
-            ->when(Request::input('search'), function ($query, $search) {
-                $query->where('name', 'like', "%{$search}%");
+            ->when(FReq::input('search'), function ($query, $search) {
+                $query->where('incumbent', 'like', "%{$search}%");
             })
             ->paginate(5)
             ->withQueryString()
             ->through(fn ($villagehead) => [
                 'id' => $villagehead->id,
-                'name' => $villagehead->name,
+                'incumbent' => $villagehead->incumbent,
+                'province' => $villagehead->province,
                 'district' => $villagehead->district,
-                'villageheadship' => $villagehead->villageheadship,
+                'headmanship' => $villagehead->headmanship,
                 'gender' => $villagehead->gender,
                 'slug' => $villagehead->slug,
             ]);
-        $filters = Request::only(['search']);
+        $filters = FReq::only(['search']);
         return Inertia::render("Backend/VillageHead/Index", compact('villageheads', 'filters'));
     }
 
@@ -57,11 +61,46 @@ class VillageheadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(VillageheadRequest $request)
+    public function store(Request $request)
     {
-        //
 
-        Villagehead::create($request->validated());
+        $validated = $request->validate([
+            'district' => 'required',
+            'province' => 'required',
+            'mutupo' => 'required',
+            'incumbent' => 'required',
+            'chieftainship'=>'required',
+            'headmanship'=>'required',
+            'numberofhousehold'=>'required',
+            'idnumber' => 'required | unique:villageheads',
+            'gender' => 'required',
+            'dateofbirth' => 'required',
+            'dateofappointment' => 'required',
+            'status' => 'required',
+            'contactnumber' => 'required',
+            'bankdetails'=>'required',
+            'dateofdeathorremoval' => 'nullable',
+            'chieftainship' =>'required'
+
+        ]);
+        $province = District::where('name', $request->district)->first();
+        Villagehead::create([
+            'district' => $request->district,
+            'province' => $province->province,
+            'mutupo' => $request->mutupo,
+            'chieftainship'=>$request->chieftainship,
+            'headmanship'=>$request->headmanship,
+            'incumbent' => $request->incumbent,
+            'idnumber' => $request->idnumber,
+            'gender' => $request->gender,
+            'dateofbirth' => $request->dateofbirth,
+            'dateofappointment' => $request->dateofappointment,
+            'status' => $request->status,
+            'bankdetails' =>$request->bankdetails,
+            'contactnumber' => $request->contactnumber,
+            'numberofhousehold'=>$request->numberofhousehold,
+            'dateofdeathorremoval' => $request->dateofdeathorremoval,
+        ]);
         return to_route('villagehead.index')->with('message', 'villagehead Created Successfull');
     }
     /**
@@ -73,8 +112,8 @@ class VillageheadController extends Controller
     public function show($slug)
     {
         $villagehead = Villagehead::where('slug', $slug)->first();
-        return Inertia::render("Backend/Villagehead/Show", compact('villagehead'));
-        //
+        return Inertia::render("Backend/VillageHead/Show", compact('villagehead'));
+
     }
 
     /**
@@ -87,7 +126,7 @@ class VillageheadController extends Controller
     {
         //
 
-        return Inertia::render('Backend/Villagehead/Edit', compact('villagehead'));
+        return Inertia::render('Backend/VillageHead/Edit', compact('villagehead'));
     }
 
     /**
@@ -97,10 +136,46 @@ class VillageheadController extends Controller
      * @param  \App\Models\villagehead  $villagehead
      * @return \Illuminate\Http\Response
      */
-    public function update(VillageheadUpdateRequest $request, Villagehead $villagehead)
+    public function update(Request $request, Villagehead $villagehead)
     {
         //
-        $villagehead->update($request->validated());
+        $validated = $request->validate([
+            'district' => 'required',
+            'province' => 'required',
+            'mutupo' => 'required',
+            'incumbent' => 'required',
+            'chieftainship'=>'required',
+            'headmanship'=>'required',
+            'numberofhousehold'=>'required',
+            'idnumber' => 'required',
+            'gender' => 'required',
+            'dateofbirth' => 'required',
+            'dateofappointment' => 'required',
+            'status' => 'required',
+            'contactnumber' => 'required',
+            'bankdetails'=>'required',
+            'dateofdeathorremoval' => 'nullable',
+            'chieftainship' =>'required'
+
+        ]);
+        $province = District::where('name', $request->district)->first();
+        $villagehead->update([
+            'district' => $request->district,
+            'province' => $province->province,
+            'mutupo' => $request->mutupo,
+            'chieftainship'=>$request->chieftainship,
+            'headmanship'=>$request->headmanship,
+            'incumbent' => $request->incumbent,
+            'idnumber' => $request->idnumber,
+            'gender' => $request->gender,
+            'dateofbirth' => $request->dateofbirth,
+            'dateofappointment' => $request->dateofappointment,
+            'status' => $request->status,
+            'bankdetails' =>$request->bankdetails,
+            'contactnumber' => $request->contactnumber,
+            'numberofhousehold'=>$request->numberofhousehold,
+            'dateofdeathorremoval' => $request->dateofdeathorremoval,
+        ]);
 
         return to_route('villagehead.index')->with('message', 'villagehead Edited Successfull');;
     }

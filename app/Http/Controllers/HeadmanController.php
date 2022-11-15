@@ -62,14 +62,14 @@ class HeadmanController extends Controller
     public function store(Request $request)
     {
         //
-             $validated = $request->validate([
+        $validated = $request->validate([
             'district' => 'required',
             'province' => 'required',
             'headmanship' =>'required',
             'chieftainship' => 'required',
             'mutupo' => 'required',
             'incumbent' => 'required',
-            'idnumber' => 'required | unique:chiefs',
+            'idnumber' => 'required | unique:headman',
             'ecnumber' => 'required',
             'gender' => 'required',
             'dateofbirth' => 'required',
@@ -140,10 +140,52 @@ class HeadmanController extends Controller
      * @param  \App\Models\Headman  $headman
      * @return \Illuminate\Http\Response
      */
-    public function update(HeadmanUpdateRequest $request, Headman $headman)
+    public function update(Request $request, Headman $headman)
     {
         //
-        $headman->update($request->validated());
+        $validated = $request->validate([
+            'district' => 'required',
+            'province' => 'required',
+            'headmanship' =>'required',
+            'chieftainship' => 'required',
+            'mutupo' => 'required',
+            'incumbent' => 'required',
+            'idnumber' => 'required',
+            'ecnumber' => 'required',
+            'gender' => 'required',
+            'dateofbirth' => 'required',
+            'dateofappointment' => 'required',
+            'status' => 'required',
+            'contactnumber' => 'required',
+            'numberofhousehold'=>'required| numeric',
+            'numberofwards' => 'required | numeric',
+            'numberofvillages' => 'required | numeric',
+            'dateofdeathorremoval' => 'nullable',
+            'physicalladdress' => 'required',
+
+        ]);
+        $province = District::where('name', $request->district)->first();
+
+        $headman->update([
+            'district' => $request->district,
+            'province' => $province->province,
+            'headmanship' =>$request->headmanship,
+            'chieftainship' => $request->chieftainship,
+            'mutupo' => $request->mutupo,
+            'incumbent' => $request->incumbent,
+            'idnumber' => $request->idnumber,
+            'ecnumber' => $request->ecnumber,
+            'gender' => $request->gender,
+            'dateofbirth' => $request->dateofbirth,
+            'dateofappointment' => $request->dateofappointment,
+            'status' => $request->status,
+            'contactnumber' => $request->contactnumber,
+            'numberofhousehold' => $request->numberofhousehold,
+            'numberofwards' => $request->numberofwards,
+            'numberofvillages' => $request->numberofvillages,
+            'dateofdeathorremoval' => $request->dateofdeathorremoval,
+            'physicalladdress' => $request->physicalladdress,
+        ]);
 
         return to_route('headman.index')->with('message', 'Headman Edited Successfull');;
     }

@@ -40,6 +40,8 @@
                     <div class=" grid grid-cols-2 gap-20">
                         <div>
                             <Link type="button" :href="route('headman.create')" class=" ml-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" >Add Headman</Link> <!---->
+                            <a type="button" class="ml-auto text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('generatepdf')">Generate PDF</a>
+                            <Link type="button" class="ml-auto text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('fileexport')">Generate Excel</Link>
 
                         </div>
                         <div>

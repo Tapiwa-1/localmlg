@@ -17,33 +17,35 @@
     });
     })
     </script>
-    
+
     <template>
         <Head title="Dashboard" />
         <div v-if="$page.props.flash.message" class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
             <span class="font-medium">Success!</span> {{ $page.props.flash.message }}
 
         </div>
-    
+
         <AuthenticatedLayout>
             <template #header>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     villagehead
                 </h2>
-                
+
             </template>
-    
+
             <div class="py-12">
-                
+
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class=" grid grid-cols-2 gap-20">
                         <div>
                             <Link type="button" class=" ml-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('villagehead.create')">Add villagehead</Link>
+                            <a type="button" class="ml-auto text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('generatepdf')">Generate PDF</a>
+                            <Link type="button" class="ml-auto text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('fileexport')">Generate Excel</Link>
 
                         </div>
                         <div>
-                          
-                                <form class="flex items-center">   
+
+                                <form class="flex items-center">
                                     <label for="simple-search" class="sr-only">Search</label>
                                     <div class="relative w-full">
                                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -55,24 +57,24 @@
 
                         </div>
                     </div>
-                    
+
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                   
+
                 <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="py-3 px-6">
-                                    Name
+                                    Incumbent
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Province
                                 </th>
                                 <th scope="col" class="py-3 px-6">
                                     District
                                 </th>
                                 <th scope="col" class="py-3 px-6">
-                                    headmaninship
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Gender
+                                    headmanship
                                 </th>
                                 <th scope="col" class="py-3 px-6">
                                     Action
@@ -82,19 +84,19 @@
                         <tbody>
                             <tr v-for="villagehead in villageheads.data" :key="villagehead.slug"  class="bg-white border-b">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
-                                    {{villagehead.name}}
+                                    {{villagehead.incumbent}}
                                 </th>
+                                <td class="py-4 px-6">
+                                    {{villagehead.province}}
+                                </td>
                                 <td class="py-4 px-6">
                                     {{villagehead.district}}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{villagehead.headmainship}}
+                                    {{villagehead.headmanship}}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{villagehead.gender}}
-                                </td>
-                                <td class="py-4 px-6">
-                                    
+
                                     <Link type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br   font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('villagehead.show', villagehead.slug)">View</Link>
                                     <Link type="button" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('villagehead.edit', villagehead.slug)">Edit</Link>
                                     <Link type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" method="delete" as="button" ae :href="route('villagehead.destroy', villagehead.slug)" >Delete</Link>
@@ -103,14 +105,13 @@
                         </tbody>
                     </table>
                 </div>
-                
+
                     </div>
                     <div class="m-2 p-2">
                     <Pagination :links="villageheads.links"/>
-            
+
                 </div>
                 </div>
             </div>
         </AuthenticatedLayout>
     </template>
-    

@@ -12,10 +12,9 @@ class Villagehead extends Model
     use Sluggable;
     use HasFactory;
 
-    protected $table = 'villageheads';
 
     protected $fillable = [
-        'name',
+        'province',
         'district',
         'chieftainship',
         'headmanship',
@@ -42,7 +41,7 @@ class Villagehead extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'incumbent'
             ]
         ];
     }
