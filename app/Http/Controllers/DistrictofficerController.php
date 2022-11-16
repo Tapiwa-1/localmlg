@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
+use App\Models\Districtofficer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -38,6 +40,23 @@ class DistrictofficerController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' =>'required | unique:districtofficers',
+            'province' =>'required',
+            'district' =>'required',
+            'password' =>'required',
+        ]);
+
+        $province = District::where('name', $request->district)->first();
+        Districtofficer::create([
+            'name'=> $request->name,
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'district' => $request->district,
+            'province' => $province->province,
+        ]);
+        return to_route('district.index')->with('message', 'District officer created Successfull');
     }
 
     /**

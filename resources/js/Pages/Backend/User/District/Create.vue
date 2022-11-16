@@ -40,15 +40,15 @@
                         <option class="w-100"  value="">Select</option>
                         <option  v-for="(value,key) in Zimdetails" :key="key" :value="value">{{key}}</option>
                 </select>
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                <InputError class="mt-2" :message="form.errors.province" />
             </div>
             <div class="mt-4" v-if="!District">
                 <InputLabel for="password_confirmation" value="Now select district" />
-                <select  style="width:100%" class="border-gray-300 w-100 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="province" id="provice">
+                <select  v-model="form.district"  style="width:100%" class="border-gray-300 w-100 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="province" id="provice">
                         <option class="w-100"  value="">Select</option>
-                        <option  v-for="province in form.province" :key="province" value="province">{{province}}</option>
+                        <option  v-for="province in form.province" :key="province" :value="province">{{province}}</option>
                 </select>
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                <InputError class="mt-2" :message="form.errors.district" />
             </div>
 
             <div  class="flex items-center justify-end mt-4">
@@ -114,8 +114,9 @@ const form = useForm({
     email: '',
     password: '',
     province:'',
+    district:'',
     password_confirmation: '',
-    terms: false,
+
 });
 
 const District = ref("false")
@@ -132,7 +133,7 @@ function DistFun() {
 
 
 const submit = () => {
-    form.post(route('register'), {
+    form.post(route('district.store'), {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };
