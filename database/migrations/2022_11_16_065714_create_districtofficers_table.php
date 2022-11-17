@@ -18,9 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('province');
-            $table->string('dictrict');
+            $table->string('district');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('slug');
             $table->rememberToken();
             $table->timestamps();
         });

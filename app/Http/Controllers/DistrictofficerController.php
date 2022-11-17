@@ -6,6 +6,8 @@ use App\Models\District;
 use App\Models\Districtofficer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Request as FReq;// use Illuminate\Http\Request;
+
 
 class DistrictofficerController extends Controller
 {
@@ -17,7 +19,23 @@ class DistrictofficerController extends Controller
     public function index()
     {
         //
-        return Inertia::render('Backend/User/District/Index');
+        $districtOfficers = Districtofficer::query()
+        ->when(FReq::input('search'), function ($query, $search) {
+            $query->where('name', 'like', "%{$search}%");
+        })
+        ->paginate(5)
+        ->withQueryString()
+        ->through(fn ($districtOfficers) => [
+            'id' => $districtOfficers->id,
+            'name' => $districtOfficers->name,
+            'email' => $districtOfficers->email,
+            'province' => $districtOfficers->province,
+            'district'=> $districtOfficers->district,
+            'slug' => $districtOfficers->slug,
+        ]);
+        $filters = FReq::only(['search']);
+        return Inertia::render("Backend/User/District/Index", compact('districtOfficers', 'filters'));
+
     }
 
     /**
