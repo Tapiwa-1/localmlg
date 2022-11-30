@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\provincial;
+use App\Models\Provincialofficer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
+use Illuminate\Support\Facades\Request as FReq;// use Illuminate\Http\Request;
 class ProvincialofficerController extends Controller
 {
     /**
@@ -14,8 +16,23 @@ class ProvincialofficerController extends Controller
      */
     public function index()
     {
-        //
-        return Inertia::render('Backend/User/Provincial/Index');
+        $provincialOfficers = Provincialofficer::query()
+        ->when(FReq::input('search'), function ($query, $search) {
+            $query->where('name', 'like', "%{$search}%");
+        })
+        ->paginate(5)
+        ->withQueryString()
+        ->through(fn ($provincialOfficers) => [
+            'id' => $provincialOfficers->id,
+            'name' => $provincialOfficers->name,
+            'email' => $provincialOfficers->email,
+            'province' => $provincialOfficers->province,
+            'provincial'=> $provincialOfficers->provincial,
+            'slug' => $provincialOfficers->slug,
+        ]);
+        $filters = FReq::only(['search']);
+        return Inertia::render("Backend/User/Provincial/Index", compact('provincialOfficers', 'filters'));
+
     }
 
     /**
@@ -38,6 +55,23 @@ class ProvincialofficerController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' =>'required | unique:provincialofficers',
+            'province' =>'required',
+            // 'provincial' =>'required',
+            'password' =>'required',
+        ]);
+        // $province = provincial::where('name', $request->provincial)->first();
+        Provincialofficer::create([
+            'name'=> $request->name,
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'province' => $request->province,
+        ]);
+
+        return to_route('provincial.index')->with('message', 'Provincial officer created Successfull');
+
     }
 
     /**

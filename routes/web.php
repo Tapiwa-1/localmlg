@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('fileexport',[ChiefController::class,'fileExport'])->name('fileexport');
     Route::resource(name: '/headman', controller: HeadmanController::class);
     Route::resource(name: '/villagehead', controller: VillageheadController::class);
-    Route::resource(name: '/user/townoffice', controller: TownofficerController::class);
+    Route::resource(name: '/user/town', controller: TownofficerController::class);
     Route::resource(name: '/user/provincial', controller: ProvincialofficerController::class);
     Route::resource(name: '/user/district', controller: DistrictofficerController::class);
 

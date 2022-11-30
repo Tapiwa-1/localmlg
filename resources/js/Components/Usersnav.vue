@@ -5,7 +5,7 @@
             <div class="">
                 <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200">
                     <li class="mr-2">
-                        <Link :href="route('townoffice.index')"   aria-current="page" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Town</Link>
+                        <Link :href="route('town.index')"   aria-current="page" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Town</Link>
                     </li>
                     <li class="mr-2">
                         <Link :href="route('provincial.index')"  :active="route().current('provincial')" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">Province</Link>
@@ -14,7 +14,7 @@
                         <Link :href="route('district.index')"  :active="route().current('district')" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 ">District</Link>
                     </li>
                 </ul>
-            </div> 
+            </div>
 </template>
 
 <script setup>

@@ -3,18 +3,20 @@
 
     <AuthenticatedLayout>
         <template #header>
-         <Usernav/>
+          <Usernav/>
         </template>
+
+
         <div class="py-12">
-                
+
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class=" grid grid-cols-2 gap-20">
                         <div>
-                            <Link type="button" class="ml-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('provincial.create')">Add Provincial Officer</Link>
+                            <Link type="button" class="ml-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('provincial.create')">Add provincial Officer</Link>
                         </div>
                         <div>
-                          
-                                <form class="flex items-center">   
+
+                                <form class="flex items-center">
                                     <label for="simple-search" class="sr-only">Search</label>
                                     <div class="relative w-full">
                                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -26,9 +28,9 @@
 
                         </div>
                     </div>
-                    
+
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                   
+
                 <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -42,40 +44,36 @@
                                 <th scope="col" class="py-3 px-6">
                                     Provice
                                 </th>
+
                                 <th scope="col" class="py-3 px-6">
                                     Action
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- <tr v-for="chief in chiefs.data" :key="chief.slug"  class="bg-white border-b">
+                            <tr v-for="provincialOfficer in provincialOfficers.data" :key="provincialOfficer.slug"  class="bg-white border-b">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
-                                    {{chief.name}}
+                                    {{provincialOfficer.name}}
                                 </th>
                                 <td class="py-4 px-6">
-                                    {{chief.district}}
+                                    {{provincialOfficer.email}}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{chief.chieftainship}}
+                                    {{provincialOfficer.province}}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{chief.gender}}
+                                    <!-- <Link type="button" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('provincialOfficer.edit', provincialOfficer.slug)">Edit</Link> -->
+                                    <!-- <Link type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" method="delete" as="button" ae :href="route('provincialOfficer.destroy', provincialOfficer.slug)" >Delete</Link> -->
                                 </td>
-                                <td class="py-4 px-6">
-                                    
-                                    <Link type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br   font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.show', chief.slug)">View</Link>
-                                    <Link type="button" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.edit', chief.slug)">Edit</Link>
-                                    <Link type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" method="delete" as="button" ae :href="route('chief.destroy', chief.slug)" >Delete</Link>
-                                </td>
-                            </tr> -->
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                
+
                     </div>
                     <div class="m-2 p-2">
-                    <!-- <Pagination :links="chiefs.links"/> -->
-            
+                    <Pagination :links="provincialOfficers.links"/>
+
                 </div>
                 </div>
             </div>
@@ -86,8 +84,23 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Link } from '@inertiajs/inertia-vue3';
-import Usernav from '@/Components/Usersnav.vue'
+import Usernav from '@/Components/Usersnav.vue';
+import Pagination from '@/Components/Pagination.vue';
+import { Inertia } from '@inertiajs/inertia';
+import {ref, watch, defineProps} from 'vue';
+const props = defineProps({
+    provincialOfficers: Object,
+    filters: Object
+});
+let search = ref(props.filters.search);
 
+
+watch (search, value =>{
+    Inertia.get('/user/provincial', {search:value},{
+    preserveState: true,
+    replace: true
+    });
+})
 
 </script>
 

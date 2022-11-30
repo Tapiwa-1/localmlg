@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\town;
+use App\Models\Townofficer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
+use Illuminate\Support\Facades\Request as FReq;// use Illuminate\Http\Request;
 class TownofficerController extends Controller
 {
     /**
@@ -14,8 +16,23 @@ class TownofficerController extends Controller
      */
     public function index()
     {
-        //
-        return Inertia::render('Backend/User/Townoffice/Index');
+        $townOfficers = Townofficer::query()
+        ->when(FReq::input('search'), function ($query, $search) {
+            $query->where('name', 'like', "%{$search}%");
+        })
+        ->paginate(5)
+        ->withQueryString()
+        ->through(fn ($townOfficers) => [
+            'id' => $townOfficers->id,
+            'name' => $townOfficers->name,
+            'email' => $townOfficers->email,
+            'province' => $townOfficers->province,
+            'town'=> $townOfficers->town,
+            'slug' => $townOfficers->slug,
+        ]);
+        $filters = FReq::only(['search']);
+        return Inertia::render("Backend/User/Town/Index", compact('townOfficers', 'filters'));
+
     }
 
     /**
@@ -26,7 +43,7 @@ class TownofficerController extends Controller
     public function create()
     {
         //
-        return Inertia::render('Backend/User/Townoffice/Create');
+        return Inertia::render('Backend/User/Town/Create');
     }
 
     /**
@@ -38,6 +55,23 @@ class TownofficerController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' =>'required | unique:townofficers',
+            'province' =>'required',
+            // 'town' =>'required',
+            'password' =>'required',
+        ]);
+        // $province = town::where('name', $request->town)->first();
+        Townofficer::create([
+            'name'=> $request->name,
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'province' => $request->province,
+        ]);
+
+        return to_route('town.index')->with('message', 'town officer created Successfull');
+
     }
 
     /**
