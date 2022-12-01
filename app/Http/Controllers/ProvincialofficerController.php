@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\provincial;
 use App\Models\Provincialofficer;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Request as FReq;// use Illuminate\Http\Request;
 class ProvincialofficerController extends Controller
@@ -16,10 +18,11 @@ class ProvincialofficerController extends Controller
      */
     public function index()
     {
-        $provincialOfficers = Provincialofficer::query()
+        $provincialOfficers = User::query()
         ->when(FReq::input('search'), function ($query, $search) {
             $query->where('name', 'like', "%{$search}%");
         })
+        ->where('role','=','provincialofficer')
         ->paginate(5)
         ->withQueryString()
         ->through(fn ($provincialOfficers) => [
@@ -57,16 +60,17 @@ class ProvincialofficerController extends Controller
         //
         $validated = $request->validate([
             'name' => 'required',
-            'email' =>'required | unique:provincialofficers',
+            'email' =>'required | unique:users',
             'province' =>'required',
             // 'provincial' =>'required',
             'password' =>'required',
         ]);
         // $province = provincial::where('name', $request->provincial)->first();
-        Provincialofficer::create([
+        User::create([
             'name'=> $request->name,
             'email'=>$request->email,
-            'password'=>$request->password,
+            'role'=>'provincialofficer',
+            'password'=> Hash::make($request->password),
             'province' => $request->province,
         ]);
 

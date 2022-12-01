@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\town;
 use App\Models\Townofficer;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Request as FReq;// use Illuminate\Http\Request;
 class TownofficerController extends Controller
@@ -16,10 +18,11 @@ class TownofficerController extends Controller
      */
     public function index()
     {
-        $townOfficers = Townofficer::query()
+        $townOfficers = User::query()
         ->when(FReq::input('search'), function ($query, $search) {
             $query->where('name', 'like', "%{$search}%");
         })
+        ->where('role','=','townofficer')
         ->paginate(5)
         ->withQueryString()
         ->through(fn ($townOfficers) => [
@@ -31,7 +34,7 @@ class TownofficerController extends Controller
             'slug' => $townOfficers->slug,
         ]);
         $filters = FReq::only(['search']);
-        return Inertia::render("Backend/User/Town/Index", compact('townOfficers', 'filters'));
+        return Inertia::render("Backend/User/Townoffice/Index", compact('townOfficers', 'filters'));
 
     }
 
@@ -43,7 +46,7 @@ class TownofficerController extends Controller
     public function create()
     {
         //
-        return Inertia::render('Backend/User/Town/Create');
+        return Inertia::render('Backend/User/Townoffice/Create');
     }
 
     /**
@@ -57,16 +60,18 @@ class TownofficerController extends Controller
         //
         $validated = $request->validate([
             'name' => 'required',
-            'email' =>'required | unique:townofficers',
+            'email' =>'required | unique:users',
             'province' =>'required',
             // 'town' =>'required',
+
             'password' =>'required',
         ]);
         // $province = town::where('name', $request->town)->first();
-        Townofficer::create([
+        User::create([
             'name'=> $request->name,
             'email'=>$request->email,
-            'password'=>$request->password,
+            'role'=>'townofficer',
+            'password'=>Hash::make($request->password),
             'province' => $request->province,
         ]);
 

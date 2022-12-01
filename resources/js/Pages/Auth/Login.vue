@@ -15,6 +15,7 @@ defineProps({
 const form = useForm({
     email: '',
     password: '',
+    role:'',
     remember: false
 });
 
@@ -34,6 +35,17 @@ const submit = () => {
         </div>
         <div class="text-center font-bold text-2xl">Admin</div>
         <form @submit.prevent="submit">
+            <div>
+                <InputLabel for="password_confirmation" value="Select Role" />
+                <select v-model="form.role" style="width:100%" class="border-gray-300 w-100 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="province" id="provice">
+                        <option class="w-100"  value="" selected>Select</option>
+                        <option value="admin">Admin</option>
+                        <option value="townofficer">Desk Officer</option>
+                        <option value="provincialofficer">Provincal Officer</option>
+                        <option value="districtofficer">District Officer</option>
+                </select>
+                <InputError class="mt-2" :message="form.errors.role" />
+            </div>
             <div>
                 <InputLabel for="email" value="Email" />
                 <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />

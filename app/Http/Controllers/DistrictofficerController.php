@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use App\Models\Districtofficer;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Request as FReq;// use Illuminate\Http\Request;
 
@@ -19,10 +21,12 @@ class DistrictofficerController extends Controller
     public function index()
     {
         //
-        $districtOfficers = Districtofficer::query()
+
+        $districtOfficers = User::query()
         ->when(FReq::input('search'), function ($query, $search) {
             $query->where('name', 'like', "%{$search}%");
         })
+        ->where('role','=','districtofficer')
         ->paginate(5)
         ->withQueryString()
         ->through(fn ($districtOfficers) => [
@@ -60,17 +64,18 @@ class DistrictofficerController extends Controller
         //
         $validated = $request->validate([
             'name' => 'required',
-            'email' =>'required | unique:districtofficers',
+            'email' =>'required | unique:users',
             'province' =>'required',
             'district' =>'required',
             'password' =>'required',
         ]);
 
         $province = District::where('name', $request->district)->first();
-        Districtofficer::create([
+        User::create([
             'name'=> $request->name,
             'email'=>$request->email,
-            'password'=>$request->password,
+            'password'=>Hash::make($request->password),
+            'role'=>'districtofficer',
             'district' => $request->district,
             'province' => $province->province,
         ]);
