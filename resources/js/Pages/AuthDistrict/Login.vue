@@ -19,7 +19,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('login'), {
+    form.post(route('authdistrict.login'), {
         onFinish: () => form.reset('password'),
     });
 };
@@ -27,13 +27,14 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Log in" />
+        <Head title="Log in Admin" />
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
-        <div class="text-center font-bold text-2xl">Admin</div>
+
         <form @submit.prevent="submit">
+            <div class="text-center font-bold text-2xl">District Officer</div>
             <div>
                 <InputLabel for="email" value="Email" />
                 <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />

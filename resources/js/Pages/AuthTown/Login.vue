@@ -19,7 +19,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('login'), {
+    form.post(route('authtown.login'), {
         onFinish: () => form.reset('password'),
     });
 };
@@ -32,8 +32,9 @@ const submit = () => {
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
-        <div class="text-center font-bold text-2xl">Admin</div>
+
         <form @submit.prevent="submit">
+            <div class="text-center font-bold text-2xl">Desk Officer</div>
             <div>
                 <InputLabel for="email" value="Email" />
                 <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />

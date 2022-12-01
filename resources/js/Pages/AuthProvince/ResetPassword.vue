@@ -30,7 +30,7 @@ const submit = () => {
         <Head title="Reset Password" />
 
         <form @submit.prevent="submit">
-            <div class="text-center font-bold text-2xl">Admin</div>
+            <div class="text-center font-bold text-2xl">Provincal Officer</div>
             <div>
                 <InputLabel for="email" value="Email" />
                 <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />

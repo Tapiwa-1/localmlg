@@ -30,7 +30,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
         </div>
 
         <form @submit.prevent="submit">
-            <div class="text-center font-bold text-2xl">Admin</div>
+            <div class="text-center font-bold text-2xl">Desk Officer</div>
             <div class="mt-4 flex items-center justify-between">
                 <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Resend Verification Email
