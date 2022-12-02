@@ -18,9 +18,9 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/dashboard';
-    public const HOMETOWN = '/dashoardtown';
-    public const PROVINCETOWN = '/dashoardprovince';
-    public const DISTRICTTOWN = '/dashoarddistrict';
+    public const HOMETOWN = '/townboard';
+    public const HOMEPROVINCE = '/dashoardprovince';
+    public const HOMEDISTRICT = '/dashoarddistrict';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

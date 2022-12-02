@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportChief;
 use App\Http\Requests\ChiefRequest;
 use App\Http\Requests\UpdateChiefRequest;
 use App\Models\Chief;
@@ -26,6 +27,7 @@ class ChiefController extends Controller
     public function index()
     {
         //
+
         $chiefs = Chief::query()
             ->when(FReq::input('search'), function ($query, $search) {
                 $query->where('chieftainship', 'like', "%{$search}%");
@@ -41,11 +43,12 @@ class ChiefController extends Controller
                 'slug' => $chief->slug,
             ]);
         $filters = FReq::only(['search']);
-        return Inertia::render("Backend/Chief/Index", compact('chiefs', 'filters'));
+        return Inertia::render("Townboard/Chief/Index", compact('chiefs', 'filters'));
     }
     public function fileExport()
     {
-        return Excel::download(new Chief, 'users-collection.xlsx');
+
+        return Excel::download(new ExportChief, 'chief.xlsx');
     }
     public function generatePDF(Req $request)
     {
@@ -65,7 +68,7 @@ class ChiefController extends Controller
     {
         //
 
-        return Inertia::render("Backend/Chief/Create");
+        return Inertia::render("Townboard/Chief/Create");
     }
 
     /**
@@ -131,7 +134,7 @@ class ChiefController extends Controller
     public function show($slug)
     {
         $chief = Chief::where('slug', $slug)->first();
-        return Inertia::render("Backend/Chief/Show", compact('chief'));
+        return Inertia::render("Townboard/Chief/Show", compact('chief'));
     }
 
     /**

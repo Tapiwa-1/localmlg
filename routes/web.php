@@ -33,21 +33,26 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
 
+    //admin
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    Route::resource(name: '/user/town', controller: TownofficerController::class);
+    Route::resource(name: '/user/provincial', controller: ProvincialofficerController::class);
+    Route::resource(name: '/user/district', controller: DistrictofficerController::class);
+    Route::get('/user', function () {
+        return Inertia::render('Backend/User/Index');
+    })->name('users');
+
+    //Town board
+    Route::get('/townboard', function () {
+        return Inertia::render('Townboard/Dashboard');
+    })->name('townboard');
     Route::resource(name: '/chief', controller: ChiefController::class);
     Route::get('generate-pdf', [ChiefController::class, 'generatePDF'])->name('generatepdf');
     Route::get('fileexport',[ChiefController::class,'fileExport'])->name('fileexport');
     Route::resource(name: '/headman', controller: HeadmanController::class);
     Route::resource(name: '/villagehead', controller: VillageheadController::class);
-    Route::resource(name: '/user/town', controller: TownofficerController::class);
-    Route::resource(name: '/user/provincial', controller: ProvincialofficerController::class);
-    Route::resource(name: '/user/district', controller: DistrictofficerController::class);
-
-    Route::get('/user', function () {
-        return Inertia::render('Backend/User/Index');
-    })->name('users');
 });
 
 require __DIR__ . '/auth.php';

@@ -1,17 +1,17 @@
 <script setup>
-    import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+    import AuthenticatedLayout from '@/Layouts/AuthenticatedTown.vue';
     import Pagination from '@/Components/Pagination.vue';
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import { Inertia } from '@inertiajs/inertia';
     import {ref, watch, defineProps} from 'vue';
     const props = defineProps({
-    chiefs: Object,
+    villageheads: Object,
     filters: Object
     });
     let search = ref(props.filters.search);
 
     watch (search, value =>{
-      Inertia.get('/chief', {search:value},{
+      Inertia.get('/villagehead', {search:value},{
       preserveState: true,
       replace: true
     });
@@ -28,7 +28,7 @@
         <AuthenticatedLayout>
             <template #header>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Chief
+                    villagehead
                 </h2>
 
             </template>
@@ -38,9 +38,9 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class=" grid grid-cols-2 gap-20">
                         <div>
-                            <Link type="button" class="ml-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.create')">Add Chief</Link>
+                            <Link type="button" class=" ml-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('villagehead.create')">Add villagehead</Link>
                             <a type="button" class="ml-auto text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('generatepdf')">Generate PDF</a>
-                            <a type="button" class="ml-auto text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('fileexport')">Generate Excel</a>
+                            <Link type="button" class="ml-auto text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('fileexport')">Generate Excel</Link>
 
                         </div>
                         <div>
@@ -74,7 +74,7 @@
                                     District
                                 </th>
                                 <th scope="col" class="py-3 px-6">
-                                    Chieftainship
+                                    headmanship
                                 </th>
                                 <th scope="col" class="py-3 px-6">
                                     Action
@@ -82,23 +82,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="chief in chiefs.data" :key="chief.slug"  class="bg-white border-b">
+                            <tr v-for="villagehead in villageheads.data" :key="villagehead.slug"  class="bg-white border-b">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
-                                    {{chief.incumbent}}
+                                    {{villagehead.incumbent}}
                                 </th>
                                 <td class="py-4 px-6">
-                                    {{chief.province}}
+                                    {{villagehead.province}}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{chief.district}}
+                                    {{villagehead.district}}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{chief.chieftainship}}
+                                    {{villagehead.headmanship}}
                                 </td>
                                 <td class="py-4 px-6">
-                                    <Link type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br   font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.show', chief.slug)">View</Link>
-                                    <Link type="button" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.edit', chief.slug)">Edit</Link>
-                                    <Link type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" method="delete" as="button" ae :href="route('chief.destroy', chief.slug)" >Delete</Link>
+
+                                    <Link type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br   font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('villagehead.show', villagehead.slug)">View</Link>
+                                    <Link type="button" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('villagehead.edit', villagehead.slug)">Edit</Link>
+                                    <Link type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" method="delete" as="button" ae :href="route('villagehead.destroy', villagehead.slug)" >Delete</Link>
                                 </td>
                             </tr>
                         </tbody>
@@ -107,7 +108,7 @@
 
                     </div>
                     <div class="m-2 p-2">
-                    <Pagination :links="chiefs.links"/>
+                    <Pagination :links="villageheads.links"/>
 
                 </div>
                 </div>

@@ -22,7 +22,7 @@ defineProps({
             <template v-else>
                 <div class="flex  align-content-center justify-center">
 
-                    <Link :href="route('login')" class="ml-4 mt-1 text-sm text-gray-700  underline">Admin</Link>
+                    <Link :href="route('login')" class="ml-4 mt-1 text-sm text-gray-700  underline">Login</Link>
                     <Link v-if="canRegister" :href="route('register')" class="ml-4 mt-1 text-sm text-gray-700  underline">Register</Link>
                 </div>
 

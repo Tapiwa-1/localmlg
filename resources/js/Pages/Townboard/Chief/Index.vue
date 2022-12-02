@@ -1,5 +1,5 @@
 <script setup>
-    import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+    import AuthenticatedLayout from '@/Layouts/AuthenticatedTown.vue';
     import Pagination from '@/Components/Pagination.vue';
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import { Inertia } from '@inertiajs/inertia';

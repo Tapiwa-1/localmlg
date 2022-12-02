@@ -13,6 +13,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.7",
+        "laravel/vapor-cli": "^1.50",
         "maatwebsite/excel": "^3.1",
         "phpoffice/phpspreadsheet": "^1.25",
         "psr/simple-cache": "^2.0",

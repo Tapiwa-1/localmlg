@@ -33,7 +33,7 @@ const submit = () => {
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
-        <div class="text-center font-bold text-2xl">Admin</div>
+
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="password_confirmation" value="Select Role" />
