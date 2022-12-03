@@ -6,6 +6,7 @@ use App\Models\town;
 use App\Models\Townofficer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Request as FReq;// use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class TownofficerController extends Controller
      */
     public function index()
     {
+        $response = Gate::inspect('edit-settings');
         $townOfficers = User::query()
         ->when(FReq::input('search'), function ($query, $search) {
             $query->where('name', 'like', "%{$search}%");
@@ -58,6 +60,7 @@ class TownofficerController extends Controller
     public function store(Request $request)
     {
         //
+
         $validated = $request->validate([
             'name' => 'required',
             'email' =>'required | unique:users',

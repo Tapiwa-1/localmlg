@@ -6,7 +6,8 @@
     import {ref, watch, defineProps} from 'vue';
     const props = defineProps({
     chiefs: Object,
-    filters: Object
+    filters: Object,
+    editDetails: Boolean,
     });
     let search = ref(props.filters.search);
 
@@ -38,7 +39,7 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class=" grid grid-cols-2 gap-20">
                         <div>
-                            <Link type="button" class="ml-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.create')">Add Chief</Link>
+                            <Link v-if="editDetails" type="button" class="ml-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.create')">Add Chief</Link>
                             <a type="button" class="ml-auto text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('generatepdf')">Generate PDF</a>
                             <a type="button" class="ml-auto text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('fileexport')">Generate Excel</a>
 
@@ -76,7 +77,7 @@
                                 <th scope="col" class="py-3 px-6">
                                     Chieftainship
                                 </th>
-                                <th scope="col" class="py-3 px-6">
+                                <th v-if="editDetails" scope="col" class="py-3 px-6">
                                     Action
                                 </th>
                             </tr>
@@ -95,7 +96,7 @@
                                 <td class="py-4 px-6">
                                     {{chief.chieftainship}}
                                 </td>
-                                <td class="py-4 px-6">
+                                <td v-if="editDetails" class="py-4 px-6">
                                     <Link type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br   font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.show', chief.slug)">View</Link>
                                     <Link type="button" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.edit', chief.slug)">Edit</Link>
                                     <Link type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" method="delete" as="button" ae :href="route('chief.destroy', chief.slug)" >Delete</Link>

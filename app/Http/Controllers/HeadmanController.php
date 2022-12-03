@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateHeadmanRequest;
 use App\Models\District;
 use App\Models\Headman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request as FReq;// use Illuminate\Http\Request;
 
 use Inertia\Inertia;
@@ -24,6 +26,10 @@ class HeadmanController extends Controller
     public function index()
     {
         //
+        $editDetails = true;
+        if (!Gate::allows('edit-data',Auth::user()->role)){
+            $editDetails = false;
+        }
         $headmans = Headman::query()
         ->when(FReq::input('search'), function ($query, $search) {
             $query->where('incumbent', 'like', "%{$search}%");
@@ -39,7 +45,7 @@ class HeadmanController extends Controller
             'slug' => $headmans->slug,
         ]);
         $filters = FReq::only(['search']);
-        return Inertia::render("Backend/Headman/Index", compact('headmans', 'filters'));
+        return Inertia::render("Townboard/Headman/Index", compact('headmans', 'filters','editDetails'));
     }
 
     /**
@@ -50,7 +56,10 @@ class HeadmanController extends Controller
     public function create()
     {
         //
-        return Inertia::render("Backend/Headman/Create");
+        if (!Gate::allows('edit-data',Auth::user()->role)){
+            abort(403);
+        }
+        return Inertia::render("Townboard/Headman/Create");
     }
 
     /**
@@ -62,6 +71,9 @@ class HeadmanController extends Controller
     public function store(Request $request)
     {
         //
+         if (!Gate::allows('edit-data',Auth::user()->role)){
+            abort(403);
+        }
         $validated = $request->validate([
             'district' => 'required',
             'province' => 'required',
@@ -116,7 +128,7 @@ class HeadmanController extends Controller
     public function show($slug)
     {
         $headman = Headman::where('slug', $slug)->first();
-        return Inertia::render("Backend/Headman/Show", compact('headman'));
+        return Inertia::render("Townboard/Headman/Show", compact('headman'));
         //
     }
 
@@ -129,8 +141,11 @@ class HeadmanController extends Controller
     public function edit(Headman $headman)
     {
         //
+         if (!Gate::allows('edit-data',Auth::user()->role)){
+            abort(403);
+        }
 
-        return Inertia::render('Backend/Headman/Edit', compact('headman'));
+        return Inertia::render('Townboard/Headman/Edit', compact('headman'));
     }
 
     /**
@@ -143,6 +158,9 @@ class HeadmanController extends Controller
     public function update(Request $request, Headman $headman)
     {
         //
+         if (!Gate::allows('edit-data',Auth::user()->role)){
+            abort(403);
+        }
         $validated = $request->validate([
             'district' => 'required',
             'province' => 'required',
@@ -199,6 +217,9 @@ class HeadmanController extends Controller
     public function destroy(Headman $headman)
     {
         //
+         if (!Gate::allows('edit-data',Auth::user()->role)){
+            abort(403);
+        }
         $headman->delete();
         return back()->with('message', 'Headman Deleted Successfull');
     }

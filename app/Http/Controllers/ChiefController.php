@@ -7,11 +7,13 @@ use App\Http\Requests\ChiefRequest;
 use App\Http\Requests\UpdateChiefRequest;
 use App\Models\Chief;
 use App\Models\District;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 use PDF;
 
 use Illuminate\Http\Request as Req;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request as FReq;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
@@ -27,7 +29,10 @@ class ChiefController extends Controller
     public function index()
     {
         //
-
+        $editDetails = true;
+        if (!Gate::allows('edit-data',Auth::user()->role)){
+            $editDetails = false;
+        }
         $chiefs = Chief::query()
             ->when(FReq::input('search'), function ($query, $search) {
                 $query->where('chieftainship', 'like', "%{$search}%");
@@ -43,7 +48,7 @@ class ChiefController extends Controller
                 'slug' => $chief->slug,
             ]);
         $filters = FReq::only(['search']);
-        return Inertia::render("Townboard/Chief/Index", compact('chiefs', 'filters'));
+        return Inertia::render("Townboard/Chief/Index", compact('chiefs', 'filters','editDetails'));
     }
     public function fileExport()
     {
@@ -67,7 +72,10 @@ class ChiefController extends Controller
     public function create()
     {
         //
-
+        // Auth::user()->role
+        if (!Gate::allows('edit-data',Auth::user()->role)){
+            abort(403);
+        }
         return Inertia::render("Townboard/Chief/Create");
     }
 
@@ -80,6 +88,9 @@ class ChiefController extends Controller
     public function store(Request $request)
     {
         //
+         if (!Gate::allows('edit-data',Auth::user()->role)){
+            abort(403);
+        }
         $validated = $request->validate([
             'district' => 'required',
             'province' => 'required',
@@ -146,6 +157,9 @@ class ChiefController extends Controller
     public function edit(Chief $chief)
     {
         //
+         if (!Gate::allows('edit-data',Auth::user()->role)){
+            abort(403);
+        }
         return Inertia::render('Backend/Chief/Edit', compact('chief'));
     }
 
@@ -159,6 +173,9 @@ class ChiefController extends Controller
     public function update(Request $request, Chief $chief)
     {
         //
+         if (!Gate::allows('edit-data',Auth::user()->role)){
+            abort(403);
+        }
         $validated = $request->validate([
             'district' => 'required',
             'province' => 'required',
@@ -211,6 +228,9 @@ class ChiefController extends Controller
     public function destroy(Chief $chief)
     {
         //
+        if (!Gate::allows('edit-data',Auth::user()->role)){
+            abort(403);
+        }
         $chief->delete();
         return back()->with('message', 'Chief Deleted Successfull');
     }

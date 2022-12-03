@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return Inertia::render('Backend/User/Index');
     })->name('users');
 
-    //Town board
+    //Town dashboard
     Route::get('/townboard', function () {
         return Inertia::render('Townboard/Dashboard');
     })->name('townboard');
@@ -53,6 +53,17 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('fileexport',[ChiefController::class,'fileExport'])->name('fileexport');
     Route::resource(name: '/headman', controller: HeadmanController::class);
     Route::resource(name: '/villagehead', controller: VillageheadController::class);
+
+    //Province dashboard
+    Route::get('/provinceboard', function () {
+        return Inertia::render('Provinceboard/Dashboard');
+    })->name('provinceboard');
+
+    //District dashboard
+    Route::get('/provinceboard', function () {
+        return Inertia::render('Districtboard/Dashboard');
+    })->name('districtboard');
+
 });
 
 require __DIR__ . '/auth.php';

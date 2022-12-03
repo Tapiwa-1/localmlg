@@ -43,14 +43,19 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if  ($request->role == 'admin' && $details->role == 'admin'){
+
             return redirect()->intended(RouteServiceProvider::HOME);
+
         }elseif($request->role == 'townofficer' && $details->role == 'townofficer') {
 
             return redirect()->intended(RouteServiceProvider::HOMETOWN);
 
         }elseif($request->role =='provincialofficer' && $details->role == 'provincialofficer'){
+
             return redirect()->intended(RouteServiceProvider::HOMEPROVINCE);
+
         }elseif($request->role =='districtofficer' && $details->role == 'districtofficer'){
+
             return redirect()->intended(RouteServiceProvider::HOMEDISTRICT);
         }
     }
