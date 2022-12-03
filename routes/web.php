@@ -7,6 +7,8 @@ use App\Http\Controllers\TownofficerController;
 use App\Http\Controllers\ProvincialofficerController;
 use App\Http\Controllers\DistrictofficerController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -41,6 +43,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource(name: '/user/provincial', controller: ProvincialofficerController::class);
     Route::resource(name: '/user/district', controller: DistrictofficerController::class);
     Route::get('/user', function () {
+        if (!Gate::allows('edit-users', Auth::user()->role)) {
+            abort(403);
+        }
         return Inertia::render('Backend/User/Index');
     })->name('users');
 

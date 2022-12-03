@@ -6,6 +6,7 @@ use App\Models\town;
 use App\Models\Townofficer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
@@ -17,8 +18,14 @@ class TownofficerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function index()
     {
+        if (!Gate::allows('edit-users', Auth::user()->role)) {
+            abort(403);
+        }
         $response = Gate::inspect('edit-settings');
         $townOfficers = User::query()
         ->when(FReq::input('search'), function ($query, $search) {
@@ -48,6 +55,9 @@ class TownofficerController extends Controller
     public function create()
     {
         //
+        if (!Gate::allows('edit-users', Auth::user()->role)) {
+            abort(403);
+        }
         return Inertia::render('Backend/User/Townoffice/Create');
     }
 
@@ -60,6 +70,9 @@ class TownofficerController extends Controller
     public function store(Request $request)
     {
         //
+        if (!Gate::allows('edit-users', Auth::user()->role)) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'name' => 'required',
@@ -91,6 +104,9 @@ class TownofficerController extends Controller
     public function show($id)
     {
         //
+        if (!Gate::allows('edit-users', Auth::user()->role)) {
+            abort(403);
+        }
     }
 
     /**
@@ -102,6 +118,9 @@ class TownofficerController extends Controller
     public function edit($id)
     {
         //
+        if (!Gate::allows('edit-users', Auth::user()->role)) {
+            abort(403);
+        }
     }
 
     /**
@@ -114,6 +133,9 @@ class TownofficerController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if (!Gate::allows('edit-users', Auth::user()->role)) {
+            abort(403);
+        }
     }
 
     /**
@@ -125,5 +147,8 @@ class TownofficerController extends Controller
     public function destroy($id)
     {
         //
+        if (!Gate::allows('edit-users', Auth::user()->role)) {
+            abort(403);
+        }
     }
 }

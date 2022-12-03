@@ -33,7 +33,8 @@ class AuthServiceProvider extends ServiceProvider
         });
         Gate::define('edit-users', function (User $user) {
             $isAdmin = ($user->role == 'admin');
-            return $isAdmin ? Response::allow(): Response::deny('You must be an administrator.');
-});
+            return $user->role == 'admin';
+        });
+
     }
 }
