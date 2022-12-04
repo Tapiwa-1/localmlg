@@ -160,7 +160,7 @@ class ChiefController extends Controller
          if (!Gate::allows('edit-data',Auth::user()->role)){
             abort(403);
         }
-        return Inertia::render('Backend/Chief/Edit', compact('chief'));
+        return Inertia::render('Townboard/Chief/Edit', compact('chief'));
     }
 
     /**

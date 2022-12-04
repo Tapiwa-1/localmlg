@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\ChiefController;
+use App\Http\Controllers\DistrictdetailsController;
 use App\Http\Controllers\HeadmanController;
 use App\Http\Controllers\VillageheadController;
 use App\Http\Controllers\TownofficerController;
 use App\Http\Controllers\ProvincialofficerController;
 use App\Http\Controllers\DistrictofficerController;
+use App\Http\Controllers\ProvincialchiefController;
+use App\Http\Controllers\ProvincialdetailsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -63,11 +66,18 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/provinceboard', function () {
         return Inertia::render('Provinceboard/Dashboard');
     })->name('provinceboard');
+    Route::get('/provinceboard/chiefs', [ProvincialdetailsController::class,'chiefs'])->name('province.chiefs');
+    Route::get('/provinceboard/headmans', [ProvincialdetailsController::class,'headmans'])->name('province.headmans');
+    Route::get('/provinceboard/villageheads', [ProvincialdetailsController::class,'villageheads'])->name('province.villageheads');
 
     //District dashboard
-    Route::get('/provinceboard', function () {
+    Route::get('/districtboard', function () {
         return Inertia::render('Districtboard/Dashboard');
     })->name('districtboard');
+     Route::get('/districtboard/chiefs', [DistrictdetailsController::class,'chiefs'])->name('district.chiefs');
+    Route::get('/districtboard/headmans', [DistrictdetailsController::class,'headmans'])->name('district.headmans');
+    Route::get('/districtboard/villageheads', [DistrictdetailsController::class,'villageheads'])->name('district.villageheads');
+
 
 });
 

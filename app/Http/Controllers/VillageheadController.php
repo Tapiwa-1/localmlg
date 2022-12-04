@@ -48,6 +48,7 @@ class VillageheadController extends Controller
             ]);
         $filters = FReq::only(['search']);
         return Inertia::render("Townboard/VillageHead/Index", compact('villageheads', 'filters','editDetails'));
+
     }
 
     /**

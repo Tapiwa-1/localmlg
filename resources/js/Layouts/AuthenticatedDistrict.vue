@@ -27,16 +27,16 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('provinceboard')" :active="route().current('provinceboard')">
+                                <NavLink :href="route('districtboard')" :active="route().current('districtboard')">
                                     Dashboards
                                 </NavLink>
-                                <NavLink :href="route('province.chiefs')" :active="route().current('province.chiefs')">
+                                <NavLink :href="route('district.chiefs')" :active="route().current('district.chiefs')">
                                     Chief
                                 </NavLink>
-                                <NavLink :href="route('province.headmans')" :active="route().current('province.headmans')">
+                                <NavLink :href="route('district.headmans')" :active="route().current('district.headmans')">
                                     Headman
                                 </NavLink>
-                                <NavLink :href="route('province.villageheads')" :active="route().current('province.villageheds')">
+                                <NavLink :href="route('district.villageheads')" :active="route().current('district.villageheds')">
                                     Village Head
                                 </NavLink>
                             </div>

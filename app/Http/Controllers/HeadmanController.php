@@ -46,6 +46,7 @@ class HeadmanController extends Controller
         ]);
         $filters = FReq::only(['search']);
         return Inertia::render("Townboard/Headman/Index", compact('headmans', 'filters','editDetails'));
+
     }
 
     /**

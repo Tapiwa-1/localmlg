@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedProvince.vue'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedDistrict.vue'
 import { Head } from '@inertiajs/inertia-vue3';
 </script>
 
