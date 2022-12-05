@@ -9,6 +9,10 @@ use App\Http\Controllers\ProvincialofficerController;
 use App\Http\Controllers\DistrictofficerController;
 use App\Http\Controllers\ProvincialchiefController;
 use App\Http\Controllers\ProvincialdetailsController;
+use App\Http\Controllers\TownfileexportController;
+use App\Models\Chief;
+use App\Models\Headman;
+use App\Models\Villagehead;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -40,7 +44,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     //admin
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+        $chiefs = Chief::count();
+        $headmans = Headman::count();
+        $villageheads = Villagehead::count();
+        return Inertia::render('Dashboard',compact('chiefs','headmans','villageheads'));
     })->name('dashboard');
     Route::resource(name: '/user/town', controller: TownofficerController::class);
     Route::resource(name: '/user/provincial', controller: ProvincialofficerController::class);
@@ -54,17 +61,26 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     //Town dashboard
     Route::get('/townboard', function () {
-        return Inertia::render('Townboard/Dashboard');
+        $chiefs = Chief::where('province',Auth::user()->provice)->count();
+        $headmans = Headman::where('province',Auth::user()->provice)->count();
+        $villageheads = Villagehead::where('province',Auth::user()->provice)->count();
+        return Inertia::render('Townboard/Dashboard',compact('chiefs','headmans','villageheads'));
     })->name('townboard');
     Route::resource(name: '/chief', controller: ChiefController::class);
     Route::get('generate-pdf', [ChiefController::class, 'generatePDF'])->name('generatepdf');
     Route::get('fileexport',[ChiefController::class,'fileExport'])->name('fileexport');
     Route::resource(name: '/headman', controller: HeadmanController::class);
     Route::resource(name: '/villagehead', controller: VillageheadController::class);
+    Route::get('townboard/chief/exportcsv', [TownfileexportController::class, 'chiefexport'])->name('townboard.chief.exportcsv');
+    Route::get('townboard/headman/exportcsv', [TownfileexportController::class, 'headmanexport'])->name('townboard.headman.exportcsv');
+    Route::get('townboard/villagehead/exportcsv', [TownfileexportController::class, 'villageheadexport'])->name('townboard.villagehead.exportcsv');
 
     //Province dashboard
     Route::get('/provinceboard', function () {
-        return Inertia::render('Provinceboard/Dashboard');
+        $chiefs = Chief::where('province',Auth::user()->province)->count();
+        $headmans = Headman::where('province',Auth::user()->province)->count();
+        $villageheads = Villagehead::where('province',Auth::user()->province)->count();
+        return Inertia::render('Provinceboard/Dashboard',compact('chiefs','headmans','villageheads'));
     })->name('provinceboard');
     Route::get('/provinceboard/chiefs', [ProvincialdetailsController::class,'chiefs'])->name('province.chiefs');
     Route::get('/provinceboard/headmans', [ProvincialdetailsController::class,'headmans'])->name('province.headmans');
@@ -72,13 +88,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     //District dashboard
     Route::get('/districtboard', function () {
-        return Inertia::render('Districtboard/Dashboard');
+         $chiefs = Chief::where('district',Auth::user()->district)->count();
+        $headmans = Headman::where('district',Auth::user()->district)->count();
+        $villageheads = Villagehead::where('district',Auth::user()->district)->count();
+        return Inertia::render('Districtboard/Dashboard',compact('chiefs','headmans','villageheads'));
     })->name('districtboard');
      Route::get('/districtboard/chiefs', [DistrictdetailsController::class,'chiefs'])->name('district.chiefs');
     Route::get('/districtboard/headmans', [DistrictdetailsController::class,'headmans'])->name('district.headmans');
     Route::get('/districtboard/villageheads', [DistrictdetailsController::class,'villageheads'])->name('district.villageheads');
-
-
 });
 
 require __DIR__ . '/auth.php';

@@ -82,7 +82,7 @@ class HeadmanController extends Controller
             'chieftainship' => 'required',
             'mutupo' => 'required',
             'incumbent' => 'required',
-            'idnumber' => 'required | unique:headman',
+            'idnumber' => 'required | unique:headmans',
             'ecnumber' => 'required',
             'gender' => 'required',
             'dateofbirth' => 'required',

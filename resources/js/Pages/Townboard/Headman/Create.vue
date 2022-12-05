@@ -65,17 +65,17 @@
 
         let removedordied = ref(false);
 
-        const District = ref("false")
-        const Province =ref([]);
+    const District = ref("false")
+    const Province =ref([]);
 
-        function DistFun() {
-        if (form.province){
-            District.value = false;
-            Province.value= form.province;
-        }else{
-            District.value = true;
+    function DistFun() {
+    if (form.province){
+        District.value = false;
+        Province.value= form.province;
+    }else{
+        District.value = true;
         }
-        };
+    };
 
     function removed(){
         removedordied.value = !removedordied.value;
@@ -169,7 +169,7 @@
                                             <label for="female" class="ml-2 text-sm font-medium text-gray-900">Female</label>
                                         </div>
                                     </div>
-                                    <InputError class="mt-2" :message="form.eregisterrrors.gender" />
+                                    <InputError class="mt-2" :message="form.errors.gender" />
                                 </div>
                                 <div class="flex-auto mx-2">
                                     <InputLabel for="dateofbirth" value="Date Of Birth" />
