@@ -23,7 +23,7 @@ class ProvincialofficerController extends Controller
             $query->where('name', 'like', "%{$search}%");
         })
         ->where('role','=','provincialofficer')
-        ->paginate(5)
+        ->paginate(10)
         ->withQueryString()
         ->through(fn ($provincialOfficers) => [
             'id' => $provincialOfficers->id,

@@ -27,7 +27,7 @@ class DistrictofficerController extends Controller
             $query->where('name', 'like', "%{$search}%");
         })
         ->where('role','=','districtofficer')
-        ->paginate(5)
+        ->paginate(10)
         ->withQueryString()
         ->through(fn ($districtOfficers) => [
             'id' => $districtOfficers->id,

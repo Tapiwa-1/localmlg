@@ -32,7 +32,7 @@ class TownofficerController extends Controller
             $query->where('name', 'like', "%{$search}%");
         })
         ->where('role','=','townofficer')
-        ->paginate(5)
+        ->paginate(10)
         ->withQueryString()
         ->through(fn ($townOfficers) => [
             'id' => $townOfficers->id,
