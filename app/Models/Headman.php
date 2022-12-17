@@ -14,27 +14,8 @@ class Headman extends Model
 
     protected $table = 'headmans';
 
-    protected $fillable = [
-        'province',
-        'district',
-        'chieftainship',
-        'headmanship',
-        'mutupo',
-        'incumbent',
-        'idnumber',
-        'ecnumber',
-        'gender',
-        'dateofbirth',
-        'dateofappointment',
-        'status',
-        'contactnumber',
-        'numberofhousehold',
-        'numberofwards',
-        'numberofvillages',
-        'dateofdeathorremoval',
-        'physicalladdress',
-        'slug',
-    ];
+   protected $guarded = []; //if empty allows all fields to be filled
+
 
     /**
      * Return the sluggable configuration array for this model.

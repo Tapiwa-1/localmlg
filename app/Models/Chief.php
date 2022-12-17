@@ -11,26 +11,7 @@ class Chief extends Model
     use Sluggable;
     use HasFactory;
 
-    protected $fillable = [
-        'province',
-        'district',
-        'chieftainship',
-        'mutupo',
-        'incumbent',
-        'idnumber',
-        'ecnumber',
-        'gender',
-        'dateofbirth',
-        'dateofappointment',
-        'status',
-        'contactnumber',
-        'numberofheadman',
-        'numberofwards',
-        'numberofvillages',
-        'dateofdeathorremoval',
-        'physicalladdress',
-        'slug',
-    ];
+    protected $guarded = []; //if empty allows all fields to be filled
 
     /**
      * Return the sluggable configuration array for this model.

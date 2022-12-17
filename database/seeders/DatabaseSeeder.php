@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Headman;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -26,6 +28,7 @@ class DatabaseSeeder extends Seeder
             DistrictSeeder::class,
             DistrictofficerSeeder::class,
             ChiefSeeder::class,
+            HeadmanSeeder::class
         ]);
     }
 }

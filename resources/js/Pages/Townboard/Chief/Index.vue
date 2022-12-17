@@ -36,7 +36,7 @@
 
             <div class="py-12">
 
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto sm:px-2 lg:px-8">
                     <div class=" grid grid-cols-2 gap-20">
                         <div>
                             <Link v-if="editDetails" type="button" class="ml-auto text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.create')">Add Chief</Link>
@@ -64,8 +64,9 @@
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
+
                                 <th scope="col" class="py-3 px-6">
-                                    Incumbent
+                                    Chieftainship
                                 </th>
                                 <th scope="col" class="py-3 px-6">
                                     Province
@@ -73,8 +74,8 @@
                                 <th scope="col" class="py-3 px-6">
                                     District
                                 </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Chieftainship
+                               <th scope="col" class="py-3 px-6">
+                                    Incumbent
                                 </th>
                                 <th v-if="editDetails" scope="col" class="py-3 px-6">
                                     Action
@@ -83,19 +84,19 @@
                         </thead>
                         <tbody>
                             <tr v-for="chief in chiefs.data" :key="chief.slug"  class="bg-white border-b">
-                                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
-                                    {{chief.incumbent}}
+                                <th scope="row" class="py-3 px-6 font-medium text-gray-900 whitespace-nowrap ">
+                                    {{chief.chieftainship}}
                                 </th>
-                                <td class="py-4 px-6">
+                                <td class="py-3 px-6">
                                     {{chief.province}}
                                 </td>
-                                <td class="py-4 px-6">
+                                <td class="py-3 px-6">
                                     {{chief.district}}
                                 </td>
-                                <td class="py-4 px-6">
-                                    {{chief.chieftainship}}
+                                <td class="py-3 px-6">
+                                    {{chief.incumbent}}
                                 </td>
-                                <td v-if="editDetails" class="py-4 px-6">
+                                <td v-if="editDetails" class="py-3 px-6">
                                     <Link type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br   font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.show', chief.slug)">View</Link>
                                     <Link type="button" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" :href="route('chief.edit', chief.slug)">Edit</Link>
                                     <Link type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" method="delete" as="button" ae :href="route('chief.destroy', chief.slug)" >Delete</Link>

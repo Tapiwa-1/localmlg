@@ -34,7 +34,7 @@ class HeadmanController extends Controller
         ->when(FReq::input('search'), function ($query, $search) {
             $query->where('incumbent', 'like', "%{$search}%");
         })
-        ->paginate(5)
+        ->paginate(10)
         ->withQueryString()
         ->through(fn ($headmans) => [
             'id' => $headmans->id,

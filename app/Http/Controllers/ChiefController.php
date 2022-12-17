@@ -37,7 +37,7 @@ class ChiefController extends Controller
             ->when(FReq::input('search'), function ($query, $search) {
                 $query->where('chieftainship', 'like', "%{$search}%");
             })
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString()
             ->through(fn ($chief) => [
                 'id' => $chief->id,

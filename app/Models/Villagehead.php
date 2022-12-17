@@ -12,25 +12,7 @@ class Villagehead extends Model
     use Sluggable;
     use HasFactory;
 
-
-    protected $fillable = [
-        'province',
-        'district',
-        'chieftainship',
-        'headmanship',
-        'mutupo',
-        'incumbent',
-        'idnumber',
-        'gender',
-        'dateofbirth',
-        'dateofappointment',
-        'status',
-        'contactnumber',
-        'bankdetails',
-        'numberofhousehold',
-        'dateofdeathorremoval',
-        'slug',
-    ];
+    protected $guarded = []; //if empty allows all fields to be filled
 
     /**
      * Return the sluggable configuration array for this model.

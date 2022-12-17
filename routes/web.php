@@ -61,9 +61,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     //Town dashboard
     Route::get('/townboard', function () {
-        $chiefs = Chief::where('province',Auth::user()->provice)->count();
-        $headmans = Headman::where('province',Auth::user()->provice)->count();
-        $villageheads = Villagehead::where('province',Auth::user()->provice)->count();
+        $chiefs = Chief::count(); //where('province',Auth::user()->provice)->count();
+        $headmans = Headman::count(); //where('province',Auth::user()->provice)->count();
+        $villageheads = Villagehead::count(); //where('province',Auth::user()->provice)->count();
         return Inertia::render('Townboard/Dashboard',compact('chiefs','headmans','villageheads'));
     })->name('townboard');
     Route::resource(name: '/chief', controller: ChiefController::class);
